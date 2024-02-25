@@ -1,17 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import todosReducer from './features/todos/todos';
+import authReducer from './features/auth/auth';
+
+const store = configureStore({
+  reducer: {
+    todos: todosReducer,
+    auth: authReducer
+  } 
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  // <React.StrictMode>  // if I uncomment this, refresh token request will fail because it will be sent twice.
+    <Provider store={store}>
+      <Router>
+        <Routes>
+          <Route path='/*' element={<App />} />
+        </Routes>
+      </Router>
+    </Provider>
+  // </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
