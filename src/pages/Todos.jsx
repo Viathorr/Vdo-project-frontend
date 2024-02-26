@@ -18,7 +18,9 @@ const Todos = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(updateTodos(data));
+    dispatch(updateTodos(data.map(todo => {
+      return { id: todo.id, name: todo.name, checked: todo.checked }
+    })));
   }, [data, dispatch]);
 
   useEffect(() => {
@@ -32,7 +34,7 @@ const Todos = () => {
 
   return (
     <div className='todos-container'>
-      <h1 className='todo-title'>TODO LIST</h1>
+      <h1 className='todo-title'>Todo list</h1>
       {isLoading && <p>Loading ...</p>}
       {!isLoading && fetchError && <p style={{ color: 'red' }}>{fetchError}</p>}
       {

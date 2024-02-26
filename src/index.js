@@ -6,12 +6,19 @@ import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import todosReducer from './features/todos/todos';
 import authReducer from './features/auth/auth';
+// import { disableReactDevTools } from '@fvilers/disable-react-devtools';
+
+
+// if (process.env.NODE_ENV === 'production') {
+  // disableReactDevTools();
+// }
 
 const store = configureStore({
   reducer: {
     todos: todosReducer,
     auth: authReducer
-  } 
+  },
+  devTools: false
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

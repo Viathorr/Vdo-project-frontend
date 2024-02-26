@@ -175,9 +175,11 @@ a {
 }
 
 .classes-container .title {
-  font-size: 2.5rem;
-  color: #fff;
-  margin-bottom: 3rem;
+  font-size: 2rem;
+  color: #000;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
 }
 
 .classes-container .days-container {
@@ -256,6 +258,7 @@ a {
 .todos-container .todo-title {
   padding-top: 1.5rem;
   margin-bottom: 2rem;
+  text-transform: uppercase;
 }
 
 .todos-container .todos-header {

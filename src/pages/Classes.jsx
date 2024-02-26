@@ -12,7 +12,7 @@ const Classes = () => {
 
   return (
     <div className="classes-container">
-      <h1 className="title">Timeline</h1>
+      <h1 className="title">Schedule</h1>
       {isLoading && <p>Loading ...</p>}
       {!isLoading && fetchError && <p style={{ color: 'red' }}>{fetchError}</p>}
       {
