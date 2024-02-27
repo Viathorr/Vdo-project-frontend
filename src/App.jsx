@@ -8,6 +8,8 @@ import Todos from './pages/Todos';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
+import Settings from './pages/settings_page/Settings';
+import QuestionsFeed from './pages/questions_feed_page/QuestionsFeed';
 import RequestAuth from './pages/RequestAuth';
 import { useSelector } from 'react-redux';
 import PersistLogin from './pages/PersistLogin';
@@ -21,14 +23,21 @@ function App() {
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
           <Route element={<RequestAuth />}>
-            <Route path='/classes' element={<Classes />} />
+            <Route path='/schedule' element={<Classes />} />
           </Route>
           <Route element={<RequestAuth />}>
             <Route path='/todos' element={<Todos />} />
           </Route>
+          <Route element={<RequestAuth />}>
+            <Route path='/questions_answers' element={<QuestionsFeed />} />
+          </Route>
           <Route element={<RequestAuth/>}>
             <Route path='/profile' element={<Profile />} />
           </Route>
+          <Route element={<RequestAuth/>}>
+            <Route path='/settings' element={<Settings />} />
+          </Route>
+          
           { !auth.isAuth ? 
             <>
             <Route path='/login' element={<Login />} />

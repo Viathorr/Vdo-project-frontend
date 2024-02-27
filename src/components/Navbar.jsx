@@ -2,6 +2,9 @@ import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import DropdownMenu from "./DropdownMenu";
 import { useSelector } from "react-redux";
+import { LuListTodo } from "react-icons/lu";
+import { RiCalendarTodoLine } from "react-icons/ri";
+import { MdOutlineQuestionAnswer } from "react-icons/md";
 
 const Navbar = ({ setLogoutClicked }) => {
   const [open, setOpen] = useState(false);
@@ -20,9 +23,10 @@ const Navbar = ({ setLogoutClicked }) => {
     <nav className="navbar">
       <div className="nav-container">
         <Link className="home-link" to={'/'}>Home</Link>
-        <div className="schedule-links">
-          <Link to={'/classes'}>Classes</Link>
-          <Link to={'/todos'}>Todos</Link>
+        <div className="links">
+          <Link className="navbar-link" to={'/schedule'}><RiCalendarTodoLine className="icon"/>Schedule</Link>
+          <Link className="navbar-link" to={'/todos'}><LuListTodo className="icon"/>Todos</Link>
+          <Link className="navbar-link" to={'/questions_answers'}><MdOutlineQuestionAnswer className="icon"/>Q&A</Link>
         </div>
         <Link className="profile-link" ref={linkRef} to='#' onClick={() => setOpen(prev => !prev)}>Profile</Link>
         <DropdownMenu menuRef={menuRef} open={open} setLogoutClicked={setLogoutClicked}/>
