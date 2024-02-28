@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { BiHide } from "react-icons/bi";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { FcGoogle, FcCheckmark, FcCancel, FcInfo } from "react-icons/fc";
 import { useDispatch } from 'react-redux';
 import { setAuth } from '../../features/auth/auth';
@@ -179,7 +179,7 @@ const SignUpForm = () => {
             onBlur={() => setConfirmPwdFocus(false)}
             aria-describedby='confirmnote'
           />
-          <BiHide
+          <MdOutlineRemoveRedEye
             className='show-pwd-icon'
             onClick={() => setShowPwd(prev => !prev)}
           />

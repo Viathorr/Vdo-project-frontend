@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { BiHide } from "react-icons/bi";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
 import { initAxios } from '../../api/axios';
 import { useDispatch } from 'react-redux';
@@ -80,7 +80,7 @@ const LoginForm = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <BiHide
+          <MdOutlineRemoveRedEye
             className='show-pwd-icon'
             onClick={() => setShowPwd(prev => !prev)}
           />

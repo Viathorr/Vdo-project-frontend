@@ -1,0 +1,160 @@
+:root {
+  --background-primary-color: #186ca1;
+  --border-primary-color: #dcdcdc;
+}
+
+.settings-container label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.35rem;
+}
+
+.settings-container h1, 
+.settings-container h2 {
+  font-weight: 500;
+}
+
+.settings-container h2 {
+  margin-bottom: 1rem;
+  font-size: 1.35rem;
+}
+
+.settings-container * {
+  text-align: start;
+}
+
+.settings-container button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.settings-container img {
+  width: 150px;
+  height: 150px;
+  border: 2px solid #ababab;
+  margin-bottom: 0.75rem;
+}
+
+.settings-container {
+  display: flex;
+  justify-content: center;
+  background-color: #f0f0f0;
+}
+
+.settings-container main {
+  margin: 5rem 0;
+  width: 80%;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.settings-container .settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-primary-color);
+}
+
+.settings-container .settings-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+}
+
+.subheader {
+  font-size: 1rem;
+  color: #686868;
+}
+
+.settings-container .settings-header .save-btn {
+  height: 100%;
+  padding: 0.5rem;
+  background-color: var(--background-primary-color);
+  border: none;
+  color: #fff;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+
+.settings-container .settings-header .save-btn:hover {
+  background-color: #12547d;
+}
+
+.settings-container .info-container {
+  display: flex;
+}
+
+.settings-container .info-container .personal-info-container .info {
+  padding: 1.5rem 2rem 2rem 0;
+  border-right: 1px solid var(--border-primary-color);
+}
+
+.settings-container .info-container .personal-info-container .info:first-of-type {
+  border-bottom: 1px solid var(--border-primary-color);
+}
+
+.settings-container .info-container .personal-info-container .info .inputs-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 1rem;
+  column-gap: 3rem;
+}
+
+.settings-container .info-container .personal-info-container .info .inputs-container .input-div {
+  width: 230px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.settings-container .info-container .personal-info-container .info .inputs-container .input-div input {
+  width: 100%;
+  padding: 0.3rem 0.5rem;
+  font-size: 1rem;
+  border: 1px solid var(--border-primary-color);
+  border-radius: 0.25rem;
+}
+
+.settings-container .wrapper {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.settings-container .wrapper .icon {
+  position: absolute;
+  right: 0.5rem;
+  top: 9px;
+  cursor: pointer;
+}
+
+.settings-container .info-container .profile-image-container {
+  padding: 1.5rem 0 0 2rem;
+}
+
+.settings-container .info-container .profile-image-container .subheader {
+  font-size: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.settings-container .info-container .profile-image-container .image-btn {
+  padding: 0.5rem;
+  background-color: #fff;
+  border: 1px solid var(--background-primary-color);
+  color: #000;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+
+.settings-container .info-container .profile-image-container .image-btn label {
+  margin-bottom: 0;
+}
+
+.settings-container .info-container .profile-image-container .image-btn:hover {
+  background-color: var(--border-primary-color);
+}
