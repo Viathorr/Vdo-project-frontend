@@ -51,9 +51,6 @@
 }
 
 .settings-container .settings-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid var(--border-primary-color);
 }
@@ -66,21 +63,6 @@
 .subheader {
   font-size: 1rem;
   color: #686868;
-}
-
-.settings-container .settings-header .save-btn {
-  height: 100%;
-  padding: 0.5rem;
-  background-color: var(--background-primary-color);
-  border: none;
-  color: #fff;
-  border-radius: 0.5rem;
-  font-size: 0.9rem;
-  transition: 0.3s;
-}
-
-.settings-container .settings-header .save-btn:hover {
-  background-color: #12547d;
 }
 
 .settings-container .info-container {
@@ -125,8 +107,8 @@
 
 .settings-container .email-div .info-msg {
   position: absolute;
-  bottom: -40%;
-  right: -30%;
+  bottom: -52%;
+  right: -26%;
   font-size: 0.75rem;
   padding: 0.5rem;
   background-color: rgba(221, 205, 32, 0.5);
@@ -177,4 +159,35 @@
 
 .settings-container .info-container .profile-image-container .image-btn:hover {
   background-color: var(--border-primary-color);
+}
+
+.settings-container .btns-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.settings-container .save-btn,
+.settings-container .delete-btn {
+  margin-top: 2rem;
+  width: 140px;
+  padding: 0.5rem;
+  background-color: var(--background-primary-color);
+  border: none;
+  color: #fff;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+
+.settings-container .delete-btn {
+  background-color: #cc0000;
+}
+
+.settings-container .save-btn:hover {
+  background-color: #12547d;
+}
+
+.settings-container .delete-btn:hover {
+  background-color: #a40000;
 }

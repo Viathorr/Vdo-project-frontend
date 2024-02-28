@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { LuUpload, LuSave } from "react-icons/lu";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { TiUserDeleteOutline } from "react-icons/ti";
 import './Settings.css'
 
 const Settings = () => {
@@ -16,11 +17,8 @@ const Settings = () => {
     <section className='settings-container'>
       <main>
         <div className='settings-header'>
-          <div>
-            <h1>Your Profile</h1>
-            <p className='subheader'>These settings allow you to customise your personal details.</p>
-          </div>
-          <button className='save-btn'><LuSave className='icon'/>Save changes</button>
+          <h1>Your Profile</h1>
+          <p className='subheader'>These settings allow you to customise your personal details.</p>
         </div>
         <div className='info-container'>
           <div className='personal-info-container'>
@@ -73,6 +71,10 @@ const Settings = () => {
             <button className='image-btn'><LuUpload className='icon'/><label htmlFor="file" style={{ cursor: 'pointer'}}>Choose image</label></button>
             <input id='file' type="file" accept='image/png, image/jpg, image/jpeg' style={{ display: 'none'}}/>
           </div>
+        </div>
+        <div className='btns-container'>
+          <button className='delete-btn'><TiUserDeleteOutline className='icon' />Delete account</button>
+          <button className='save-btn'><LuSave className='icon'/>Save changes</button>
         </div>
       </main>
     </section>
