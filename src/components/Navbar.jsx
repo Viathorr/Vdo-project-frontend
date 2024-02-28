@@ -1,14 +1,12 @@
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import DropdownMenu from "./DropdownMenu";
-import { useSelector } from "react-redux";
 import { LuListTodo } from "react-icons/lu";
 import { RiCalendarTodoLine } from "react-icons/ri";
-import { MdOutlineQuestionAnswer } from "react-icons/md";
+import { MdOutlineQuestionAnswer, MdNotifications } from "react-icons/md";
 
 const Navbar = ({ setLogoutClicked }) => {
   const [open, setOpen] = useState(false);
-  const auth = useSelector(state => state.auth.value);
 
   const linkRef = useRef();
   const menuRef = useRef();
@@ -20,7 +18,7 @@ const Navbar = ({ setLogoutClicked }) => {
   });
 
   return (
-    <nav className="navbar">
+    <nav className="navbar" anchor='dropdown-menu'>
       <div className="nav-container">
         <Link className="home-link" to={'/'}>Home</Link>
         <div className="links">
@@ -29,7 +27,7 @@ const Navbar = ({ setLogoutClicked }) => {
           <Link className="navbar-link" to={'/questions_answers'}><MdOutlineQuestionAnswer className="icon"/>Q&A</Link>
         </div>
         <Link className="profile-link" ref={linkRef} to='#' onClick={() => setOpen(prev => !prev)}>Profile</Link>
-        <DropdownMenu menuRef={menuRef} open={open} setLogoutClicked={setLogoutClicked}/>
+        <DropdownMenu id='dropdown-menu' menuRef={menuRef} open={open} setLogoutClicked={setLogoutClicked}/>
       </div>
     </nav>
   )

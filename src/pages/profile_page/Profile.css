@@ -1,0 +1,106 @@
+.profile-container {
+  margin-top: 2rem;
+}
+
+.profile-container .profile-header {
+  position: relative;
+  background-image: url('https://t3.ftcdn.net/jpg/02/99/99/12/360_F_299991216_xFfUhQAHFWHCmdsfX2GF0DvGVdxmq6Id.jpg');
+  background-position: center;
+  background-size: cover;
+  height: 240px;
+  border: 1px solid #390a64de;
+  transform: scaleX(-1);
+}
+
+.profile-container .profile-header-content {
+  position: absolute;
+  top: 10rem;
+  left: 0;
+  padding: 2.5rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.profile-container .profile-header-content .profile-img-container {
+  position: relative;
+  height: 150px;
+  width: 150px;
+  object-fit: contain;
+  object-position: center;
+  border: 2px solid #ababab;
+  margin-right: 2rem;
+}
+
+.profile-container .profile-header-content .profile-img-container img {
+  height: 100%;
+  width: 100%;
+}
+
+.profile-container .profile-header-content .profile-img-container .online {
+  position: absolute;
+  right: -7px;
+  top: -7px;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background-color: #00d700;
+}
+
+.profile-container .profile-header-content .user-info-container h2 {
+  text-align: start;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.profile-container .profile-header-content .user-info-container p {
+  color: #848484;
+}
+
+.profile-container .profile-header-content .user-info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.profile-container .activity-info-container {
+  margin-top: 10rem;
+}
+
+.profile-container .activity-info-container .stats-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 2rem;
+}
+
+.profile-container .activity-info-container .stats-container .stats-div {
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+  width: 300px;
+  height: 120px;
+  border-radius: 0.5rem;
+}
+
+.profile-container .activity-info-container .stats-container .stats-div h3 {
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-top: 1rem;
+  margin-left: 1.25rem;
+  text-align: start;
+  color: #464646;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.profile-container .activity-info-container .stats-container .stats-div p {
+  text-align: start;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 1.75rem;
+  margin-left: 1.25rem;
+}
+
+.profile-container .activity-info-container .activity-stats {
+  margin-top: 3rem;
+}

@@ -110,6 +110,11 @@ a {
   pointer-events: all;
 }
 
+.navbar .dropdown-menu.not-auth {
+  bottom: -100px;
+  width: 140px;
+}
+
 .navbar .dropdown-menu .icon {
   margin-left: 0.5rem;
   margin-right: 1rem;
@@ -148,7 +153,7 @@ a {
 .assignments-container,
 .login-container,
 .signup-container {
-  margin-top: 4rem;
+  margin-top: 3rem;
 }
 
 .welcome-section {
@@ -510,12 +515,6 @@ a {
   background-color: #125884;
 }
 
-/* Assignments */
-/* .assignments-container {
-  margin-top: 5rem;
-  height: 100vh;
-} */
-
 /* Login and Sign up*/
 .login-container,
 .signup-container {
@@ -692,7 +691,7 @@ a {
 /* Profile */
 .profile-container {
   margin-top: 5rem;
-  height: 100%;
+  margin-bottom: 3rem;
 }
 
 /* Logout popup */

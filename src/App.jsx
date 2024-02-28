@@ -5,7 +5,7 @@ import Layout from './pages/Layout';
 import Missing from './pages/Missing';
 import Classes from './pages/Classes';
 import Todos from './pages/Todos';
-import Profile from './pages/Profile';
+import Profile from './pages/profile_page/Profile';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Settings from './pages/settings_page/Settings';
