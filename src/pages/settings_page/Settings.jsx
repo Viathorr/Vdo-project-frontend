@@ -31,9 +31,10 @@ const Settings = () => {
                   <label htmlFor="full-name">Full name</label>
                   <input id='full-name' type="text" value={user.name} placeholder='Name' onChange={(e) => setUser(prev => ({ ...prev, name: e.target.value }))} required/>
                 </div>
-                <div className='input-div'>
+                <div className='input-div email-div'>
                   <label htmlFor="email">Email address</label>
-                  <input id='email' type="email" value={user.email} placeholder='Email' disabled/>
+                  <input id='email' type="email" value={user.email} placeholder='Email' disabled />
+                  <div className='info-msg'>You can't change your email.</div>
                 </div>
                 <div className='input-div'>
                   <label htmlFor="country">Country</label>
@@ -41,7 +42,7 @@ const Settings = () => {
                 </div>
                 <div className='input-div'>
                   <label htmlFor="phone-num">Phone number</label>
-                  <input id='phone-num' type="text" value={user.phoneNumber} placeholder='Phone number' onChange={(e) => setUser(prev => ({ ...prev, phoneNumber: e.target.value }))} />
+                  <input id='phone-num' type="tel" value={user.phoneNumber} placeholder='Phone number' onChange={(e) => setUser(prev => ({ ...prev, phoneNumber: e.target.value }))} />
                 </div>
               </div>
             </div>

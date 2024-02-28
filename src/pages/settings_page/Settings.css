@@ -119,6 +119,26 @@
   border-radius: 0.25rem;
 }
 
+.settings-container .info-container .personal-info-container .info .inputs-container .email-div {
+  position: relative;
+}
+
+.settings-container .email-div .info-msg {
+  position: absolute;
+  bottom: -40%;
+  right: -30%;
+  font-size: 0.75rem;
+  padding: 0.5rem;
+  background-color: rgba(221, 205, 32, 0.5);
+  border-radius: 0.25rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.settings-container .email-div:hover .info-msg {
+  opacity: 1;
+}
+
 .settings-container .wrapper {
   margin: 0;
   padding: 0;
