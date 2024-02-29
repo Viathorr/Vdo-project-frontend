@@ -55,6 +55,7 @@
 
 .profile-container .profile-header-content .user-info-container p {
   color: #848484;
+  text-align: start;
 }
 
 .profile-container .profile-header-content .user-info-container {
@@ -72,6 +73,7 @@
   flex-wrap: wrap;
   justify-content: space-around;
   gap: 2rem;
+  margin: 0 5rem;
 }
 
 .profile-container .activity-info-container .stats-container .stats-div {

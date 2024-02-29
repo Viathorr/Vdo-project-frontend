@@ -101,11 +101,13 @@
   border-radius: 0.25rem;
 }
 
-.settings-container .info-container .personal-info-container .info .inputs-container .email-div {
+.settings-container .info-container .personal-info-container .info .inputs-container .email-div,
+.settings-container .info-container .personal-info-container .info .inputs-container .phone-num-div,
+.settings-container .info-container .personal-info-container .info .inputs-container .name-div {
   position: relative;
 }
 
-.settings-container .email-div .info-msg {
+.settings-container .info-msg {
   position: absolute;
   bottom: -52%;
   right: -26%;
@@ -113,8 +115,22 @@
   padding: 0.5rem;
   background-color: rgba(221, 205, 32, 0.5);
   border-radius: 0.25rem;
-  opacity: 0;
   transition: opacity 0.3s;
+}
+
+.settings-container .email-div .info-msg {
+  opacity: 0;
+}
+
+.settings-container .name-div .info-msg {
+  right: 10px;
+}
+
+.settings-container .phone-num-div .info-msg,
+.settings-container .wrapper .info-msg {
+  right: auto;
+  left: 2%;
+  bottom: -80%;
 }
 
 .settings-container .email-div:hover .info-msg {
@@ -132,6 +148,18 @@
   right: 0.5rem;
   top: 9px;
   cursor: pointer;
+}
+
+.settings-container .wrapper .info-msg {
+  bottom: -108%;
+  right: auto;
+  background-color: rgba(227, 61, 32, 0.5);
+}
+
+.settings-container .wrapper.new-pwd .info-msg {
+  left: auto;
+  right: -195%;
+  bottom: -60%;
 }
 
 .settings-container .info-container .profile-image-container {
@@ -168,7 +196,8 @@
 }
 
 .settings-container .save-btn,
-.settings-container .delete-btn {
+.settings-container .delete-btn,
+.settings-container .change-pwd-btn {
   margin-top: 2rem;
   width: 140px;
   padding: 0.5rem;
@@ -180,11 +209,17 @@
   transition: 0.3s;
 }
 
+.settings-container .change-pwd-btn {
+  justify-content: center;
+  margin-right: 8rem;
+}
+
 .settings-container .delete-btn {
   background-color: #cc0000;
 }
 
-.settings-container .save-btn:hover {
+.settings-container .save-btn:hover,
+.settings-container .change-pwd-btn:hover {
   background-color: #12547d;
 }
 

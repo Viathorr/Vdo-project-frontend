@@ -1,20 +1,15 @@
-import React, { useState } from 'react';
 import useAxiosFetch from '../../hooks/useAxiosFetch';
 import './Profile.css';
 import { FcOk, FcClock, FcCollaboration } from "react-icons/fc";
+import { useSelector } from 'react-redux';
 
 const Profile = () => {
-  const [user, setUser] = useState({
-    name: 'Min Viathor',
-    occupation: 'Software engineer',
-    country: 'Japan',
-    profileImage: 'https://cdn.imgchest.com/files/e4gdcverzr4.png'
-  });
-  const [userInfo, setUserInfo] = useState({
+  const user = useSelector(state => state.user.value);
+  const userInfo = {
     completedTodos: 23,
     askedQuestions: 4,
     leftTodos: 7
-  });
+  };
 
   return (
     <section className='profile-container'>
@@ -26,7 +21,7 @@ const Profile = () => {
         </div>
         <div className='user-info-container'>
           <h2>{user.name}</h2>
-          <p>{user.occupation}, {user.country}</p>
+          <p>{user.country}</p>
         </div>
       </div>
       <div className='activity-info-container'>

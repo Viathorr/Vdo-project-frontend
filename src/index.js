@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import todosReducer from './features/todos/todos';
 import authReducer from './features/auth/auth';
+import userReducer from './features/auth/user';
 // import { disableReactDevTools } from '@fvilers/disable-react-devtools';
 
 
@@ -16,7 +17,8 @@ import authReducer from './features/auth/auth';
 const store = configureStore({
   reducer: {
     todos: todosReducer,
-    auth: authReducer
+    auth: authReducer,
+    user: userReducer
   },
   devTools: false
 });
