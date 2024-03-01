@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { FcGoogle, FcCheckmark, FcCancel, FcInfo } from "react-icons/fc";
 import { useDispatch } from 'react-redux';
 import { setAuth } from '../../features/auth/auth';
@@ -179,10 +180,16 @@ const SignUpForm = () => {
             onBlur={() => setConfirmPwdFocus(false)}
             aria-describedby='confirmnote'
           />
-          <MdOutlineRemoveRedEye
+          {showPwd ? 
+          <VscEyeClosed
             className='show-pwd-icon'
             onClick={() => setShowPwd(prev => !prev)}
-          />
+            /> :
+          <VscEye
+            className='show-pwd-icon'
+            onClick={() => setShowPwd(prev => !prev)}
+            />
+          }
           {confirmValid ? <FcCheckmark className='check-mark' /> : <FcCancel className='forbidden-mark' />}
           <p id="confirmnote" className={confirmPwdFocus && !confirmValid ? "instructions" : "offscreen"}>
             <FcInfo className='info-icon' />

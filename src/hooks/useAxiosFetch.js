@@ -16,7 +16,7 @@ const useAxiosFetch = (dataUrl) => {
       try {
         const response = await axiosJWT.get(url, { signal: controller.signal, withCredentials: true });
         if (isMounted) {
-          setData(response.data?.length ? response.data: []);
+          setData(response.data ? response.data: []);
           setFetchError(null);
         }
       } catch (err) {

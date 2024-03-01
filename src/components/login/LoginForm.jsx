@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { FcGoogle } from "react-icons/fc";
 import { initAxios } from '../../api/axios';
 import { useDispatch } from 'react-redux';
@@ -80,10 +80,16 @@ const LoginForm = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <MdOutlineRemoveRedEye
+          {showPwd ? 
+          <VscEyeClosed
             className='show-pwd-icon'
             onClick={() => setShowPwd(prev => !prev)}
-          />
+            /> :
+          <VscEye
+            className='show-pwd-icon'
+            onClick={() => setShowPwd(prev => !prev)}
+            />
+          }
         </div>
         <button className='submit-btn' onClick={handleSubmit}>Login</button>
       </form>
