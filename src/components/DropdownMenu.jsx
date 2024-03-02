@@ -10,7 +10,7 @@ const DropdownMenu = ({ menuRef, open, setLogoutClicked }) => {
   const auth = useSelector(state => state.auth.value);
 
   return (
-    <div ref={menuRef} className={ open ? auth.isAuth ? 'dropdown-menu open' : 'dropdown-menu open not-auth' : 'dropdown-menu' }>
+    <div ref={menuRef} className={ open ? auth.isAuth ? 'dropdown-menu open auth' : 'dropdown-menu open not-auth' : auth.isAuth ? 'dropdown-menu auth' : 'dropdown-menu not-auth' }>
       { auth.isAuth ? (
         <>
           <button className='menu-btn'><CgProfile className='icon' />

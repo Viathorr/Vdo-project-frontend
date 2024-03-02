@@ -1,22 +1,26 @@
 import { useEffect, useState } from 'react';
-import useAxiosPrivate from '../../hooks/useAxiosPrivate';
+import useChangePassword from '../../hooks/useChangePassword';
+import useDelete from '../../hooks/useDelete';
+import useChangeUserInfo from '../../hooks/useChangeUserInfo';
 import useAxiosFetch from '../../hooks/useAxiosFetch';
 import { LuUpload, LuSave } from "react-icons/lu";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { TiUserDeleteOutline } from "react-icons/ti";
 import { useSelector, useDispatch } from 'react-redux';
-import { setUser, removeUser } from '../../features/auth/user';
+import { setUser } from '../../features/auth/user';
 import { FcOk, FcCancel } from "react-icons/fc";
-import { removeAuth } from '../../features/auth/auth';
 import './Settings.css';
+import DelAccount from '../../components/settings/DelAccount';
 
-const NAME_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+const NAME_REGEX = /^[A-z][A-z0-9\s-_]{3,23}$/;
 const PHONE_NUM_REGEX = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const API_URL = '/user';
 
 const Settings = () => {
   const { data, isLoading, fetchError } = useAxiosFetch('/user');
+  const changePwd = useChangePassword();
+  const saveChanges = useChangeUserInfo();
   const user = useSelector(state => state.user.value);
   const dispatch = useDispatch();
   const [imgFile, setImgFile] = useState(null);
@@ -31,9 +35,9 @@ const Settings = () => {
   const [currPwdValid, setCurrPwdValid] = useState(true);
   const [newPwdValid, setNewPwdValid] = useState(false);
   const [showPwds, setShowPwds] = useState({ curr: false, new: false });
+  const [deleteClicked, setDeleteClicked] = useState(false);
   const [changeRes, setChangeRes] = useState(null); 
   const [pwdFocus, setPwdFocus] = useState(false);
-  const axiosJWT = useAxiosPrivate();
 
   useEffect(() => {
     dispatch(setUser({ ...user, name: data.name, country: data.country, email: data.email, phoneNumber: data.phoneNum }));
@@ -74,7 +78,7 @@ const Settings = () => {
   const handleSaveChanges = async () => {
     try {
       if (nameValid && phoneNumValid) {
-        const res = await axiosJWT.put(`${API_URL}/change-user-info`, { name, country, phoneNum });
+        const res = await saveChanges(name, country, phoneNum);
 
         if (res.status === 200) {
           if (imgFile) {
@@ -95,18 +99,14 @@ const Settings = () => {
       setTimeout(() => {
         setChangeRes(null);
       }, 3000);
-      console.log(err);
+      console.log(err.response.data.message);
     }
-  };
-
-  const handleDeleteAcc = async () => {
-    
   };
 
   const handlePwdChange = async () => {
     if (currPassword && newPassword && newPwdValid && currPassword !== newPassword) {
       try {
-      const res = await axiosJWT.put(`${API_URL}/change-password`, { currPassword, newPassword });
+        const res = await changePwd(currPassword, newPassword);
         if (res.data.message === 'Success') {
           setCurrPassword('');
           setNewPassword('');
@@ -156,7 +156,8 @@ const Settings = () => {
                       value={name}
                       placeholder='Name'
                       onChange={(e) => setName(e.target.value)}
-                      required
+                        required
+                        autoComplete='off'
                     />
                     <div className='info-msg' hidden={nameValid ? true : false}>4 to 24 characters.<br />
                     Name must begin with a letter.</div>
@@ -179,6 +180,7 @@ const Settings = () => {
                       type="text"
                       value={country}
                       placeholder='Country'
+                      autoComplete='off'
                       onChange={(e) => setCountry(e.target.value)}
                     />
                   </div>
@@ -188,7 +190,8 @@ const Settings = () => {
                       id='phone-num'
                       type="tel"
                       value={phoneNum}
-                      placeholder='Phone number'
+                        placeholder='Phone number'
+                        autoComplete='off'
                       onChange={(e) => setPhoneNum(e.target.value)}
                     />
                     <div className='info-msg' hidden={phoneNumValid ? true : false}>Please enter a valid phone number.<br/>Num of digits: 10-12</div>
@@ -206,6 +209,7 @@ const Settings = () => {
                         type={showPwds.curr ? 'text' : 'password'}
                         onChange={(e) => setCurrPassword(e.target.value)}
                         value={currPassword}
+                        autoComplete='off'
                         placeholder='Current password'
                       />
                         {showPwds.curr ? 
@@ -245,13 +249,13 @@ const Settings = () => {
                       />
                     }
                       <div className={ (!newPwdValid && pwdFocus) ? 'info-msg' : 'offscreen'} >8 to 24 characters.<br />
-              Must include uppercase and lowercase letters, a number and a special character.<br />
-              Allowed special characters: 
-              <span aria-label="exclamation mark">!</span>
-              <span aria-label="at symbol">@</span>
-              <span aria-label="hashtag">#</span>
-              <span aria-label="dollar sign">$</span>
-              <span aria-label="percent">%</span></div>
+                        Must include uppercase and lowercase letters, a number and a special character.<br />
+                        Allowed special characters: 
+                        <span aria-label="exclamation mark">!</span>
+                        <span aria-label="at symbol">@</span>
+                        <span aria-label="hashtag">#</span>
+                        <span aria-label="dollar sign">$</span>
+                        <span aria-label="percent">%</span></div>
                     </div>
                   </div>
                 </div>
@@ -267,14 +271,15 @@ const Settings = () => {
           </div>
           <div className='btns-container'>
             <button className='change-pwd-btn' onClick={handlePwdChange}>Change password</button>
-            <button className='delete-btn' onClick={handleDeleteAcc}><TiUserDeleteOutline className='icon' />Delete account</button>
+            <button className='delete-btn' onClick={() => setDeleteClicked(true)}><TiUserDeleteOutline className='icon' />Delete account</button>
             <button className='save-btn' onClick={handleSaveChanges}><LuSave className='icon' />Save changes</button>
               {changeRes ? changeRes === 'ok' ? 
                 <FcOk className='res-icon' /> :
                 <FcCancel className='res-icon' /> : 
                 null
               }
-          </div>
+            </div>
+            <DelAccount deleteClicked={deleteClicked} setDeleteClicked={setDeleteClicked}/>
         </main>
       }
     </section>

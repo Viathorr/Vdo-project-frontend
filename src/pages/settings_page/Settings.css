@@ -1,6 +1,7 @@
 :root {
   --background-primary-color: #186ca1;
   --border-primary-color: #dcdcdc;
+  --delete-color: #cc0000;
 }
 
 .settings-container label {
@@ -48,6 +49,7 @@
   background: #fff;
   padding: 2rem;
   border-radius: 1rem;
+  position: relative;
 }
 
 .settings-container .settings-header {
@@ -218,7 +220,7 @@
 }
 
 .settings-container .delete-btn {
-  background-color: #cc0000;
+  background-color: var(--delete-color);
 }
 
 .settings-container .save-btn:hover,
@@ -235,4 +237,15 @@
   right: -24px;
   bottom: 10px;
   font-size: 1rem;
+}
+
+/* Delete pop up (.delete-window) is in App.css */
+.settings-container .delete-window .delete-window-content p {
+  text-align: center;
+}
+
+.delete-window .buttons-container .btn:last-of-type {
+  color: #fff;
+  background-color: var(--delete-color);
+  border: none;
 }

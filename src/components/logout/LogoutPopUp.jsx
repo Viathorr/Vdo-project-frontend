@@ -11,7 +11,7 @@ const LogoutPopUp = ({ logoutClicked, setLogoutClicked }) => {
     setLogoutClicked(false);
     navigate('/');
   };
-
+ 
   return (
     <div className={ logoutClicked ? 'logout-window open' : 'logout-window' }>
       <div className='logout-window-content'>
@@ -19,7 +19,7 @@ const LogoutPopUp = ({ logoutClicked, setLogoutClicked }) => {
         <p>Oh no! You're leaving...</p>
         <p>Are you sure?</p>
           <div className='buttons-container'>
-            <button className='btn no-btn' onClick={() => setLogoutClicked(false)}>Naah, Just Kidding</button>
+            <button className='btn no-btn' onClick={() => setLogoutClicked(false)}>No, Just Kidding</button>
             <button className='btn yes-btn' onClick={() => handleLogout()}>Yes, Log Me Out</button>
           </div>
       </div>
