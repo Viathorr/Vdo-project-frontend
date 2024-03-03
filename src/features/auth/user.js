@@ -5,7 +5,7 @@ const initialState = {
   country: '',
   email: '',
   phoneNumber: '',
-  profileImage: 'https://cdn.imgchest.com/files/e4gdcverzr4.png'
+  profileImage: ''
 };
 
 export const userSlice = createSlice({

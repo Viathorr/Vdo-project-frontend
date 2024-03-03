@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import useChangePassword from '../../hooks/useChangePassword';
-import useDelete from '../../hooks/useDelete';
 import useChangeUserInfo from '../../hooks/useChangeUserInfo';
 import useAxiosFetch from '../../hooks/useAxiosFetch';
+import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import { LuUpload, LuSave } from "react-icons/lu";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { TiUserDeleteOutline } from "react-icons/ti";
@@ -38,16 +38,18 @@ const Settings = () => {
   const [deleteClicked, setDeleteClicked] = useState(false);
   const [changeRes, setChangeRes] = useState(null); 
   const [pwdFocus, setPwdFocus] = useState(false);
+  const axios = useAxiosPrivate();
 
   useEffect(() => {
-    dispatch(setUser({ ...user, name: data.name, country: data.country, email: data.email, phoneNumber: data.phoneNum }));
+    dispatch(setUser({ ...user, name: data.name, country: data.country, email: data.email, phoneNumber: data.phoneNum, profileImage: data.profilePicture }));
   }, [data, dispatch]);
 
   useEffect(() => {
     setName(user.name);
     setCountry(user.country);
     setPhoneNum(user.phoneNumber);
-  }, [user.name, user.country, user.phoneNum]);
+    setProfileImage(user.profileImage);
+  }, [user.name, user.country, user.phoneNum, user.profileImage]);
 
   useEffect(() => {
     if (phoneNum) {
@@ -70,8 +72,11 @@ const Settings = () => {
   }, [newPassword]);
 
   const handleFileChange = (e) => {
+    const formData = new FormData(); 
+    formData.append('my-image-file', e.target.files[0], e.target.files[0].name);
+    setImgFile(formData);
+
     const selectedFile = e.target.files[0];
-    setImgFile(selectedFile);
     setProfileImage(URL.createObjectURL(selectedFile));
   };
 
@@ -82,7 +87,10 @@ const Settings = () => {
 
         if (res.status === 200) {
           if (imgFile) {
-            dispatch(setUser({ ...user, profileImage: (URL.createObjectURL(imgFile)) }));
+            const res = await axios.put('/user/change-profile-image', imgFile)
+            console.log('Axios response:', res);
+            setProfileImage(res.data.downloadURL);
+            dispatch(setUser({ ...user, profileImage: res.data.downloadURL }));
           }
           setChangeRes('ok');
         } else {
@@ -92,7 +100,6 @@ const Settings = () => {
         setTimeout(() => {
           setChangeRes(null);
         }, 3000);
-
       }
     } catch (err) {
       setChangeRes('fail');
