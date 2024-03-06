@@ -57,15 +57,20 @@ const SearchTodos = ({ setDisplayMode, setSortingMode, searchValue, setSearchVal
           onChange={(e) => setSearchValue(e.target.value)}
         />
       </form>
-      <Select
+      <div className="todos-select-div">
+        <div className="filter-by">Filter by</div>
+        <Select
         className='todos-select'
         options={todosOptions}
         defaultValue={todosOptions[0]}
         isSearchable={false}
         onChange={(choice) => handleDisplayChange(choice.value)}
         styles={selectStyles}
-      />
-      <Select
+      /> 
+      </div>
+      <div className="todos-sorting-div">
+        <div className="sort-by">Sort by</div>
+        <Select
         className='todos-sorting'
         options={sortingOptions}
         defaultValue={sortingOptions[0]}
@@ -73,6 +78,7 @@ const SearchTodos = ({ setDisplayMode, setSortingMode, searchValue, setSearchVal
         onChange={(choice) => handleSortingChange(choice.value)}
         styles={selectStyles}
       />
+      </div>
     </div>
   )
 };
