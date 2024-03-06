@@ -18,7 +18,7 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const API_URL = '/user';
 
 const Settings = () => {
-  const { data, isLoading, fetchError } = useAxiosFetch('/user');
+  const { data, isLoading, fetchError } = useAxiosFetch(API_URL);
   const changePwd = useChangePassword();
   const saveChanges = useChangeUserInfo();
   const user = useSelector(state => state.user.value);
@@ -27,10 +27,10 @@ const Settings = () => {
   const [name, setName] = useState(user.name);
   const [country, setCountry] = useState(user.country ? user.country : '');
   const [phoneNum, setPhoneNum] = useState(user.phoneNumber ? user.phoneNumber : '');
+  const [phoneNumValid, setPhoneNumValid] = useState(true);
   const [profileImage, setProfileImage] = useState(user.profileImage ? user.profileImage : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png');
   const [currPassword, setCurrPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const [phoneNumValid, setPhoneNumValid] = useState(true);
   const [nameValid, setNameValid] = useState(true);
   const [currPwdValid, setCurrPwdValid] = useState(true);
   const [newPwdValid, setNewPwdValid] = useState(false);
@@ -46,10 +46,19 @@ const Settings = () => {
 
   useEffect(() => {
     setName(user.name);
+  }, [user.name]);
+
+  useEffect(() => {
     setCountry(user.country);
+  }, [user.country]);
+
+  useEffect(() => {
     setPhoneNum(user.phoneNumber);
+  }, [user.phoneNum]);
+
+  useEffect(() => {
     setProfileImage(user.profileImage);
-  }, [user.name, user.country, user.phoneNum, user.profileImage]);
+  }, [user.profileImage]);
 
   useEffect(() => {
     if (phoneNum) {
@@ -87,7 +96,7 @@ const Settings = () => {
 
         if (res.status === 200) {
           if (imgFile) {
-            const res = await axios.put('/user/change-profile-image', imgFile)
+            const res = await axios.put(`${API_URL}/change-profile-image`, imgFile)
             console.log('Axios response:', res);
             setProfileImage(res.data.downloadURL);
             dispatch(setUser({ ...user, profileImage: res.data.downloadURL }));

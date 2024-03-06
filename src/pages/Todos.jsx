@@ -12,6 +12,8 @@ const Todos = () => {
   const [mode, setMode] = useState('light');
   const [searchValue, setSearchValue] = useState('');
   const [displayMode, setDisplayMode] = useState('all');
+  // TODO Handle todos sorting
+  const [sortingMode, setSortingMode] = useState('date');
   const [addTodoClicked, setAddTodoClicked] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const todos = useSelector(state => state.todos.value);
@@ -41,7 +43,8 @@ const Todos = () => {
         !isLoading && !fetchError && 
         <>
           <SearchTodos 
-            setDisplayMode={setDisplayMode} 
+            setDisplayMode={setDisplayMode}
+            setSortingMode={setSortingMode}
             searchValue={searchValue} 
             setSearchValue={setSearchValue} 
             mode={mode} 

@@ -1,12 +1,16 @@
-import React from 'react';
-import { IoSearchOutline, IoSunnyOutline, IoMoonOutline } from "react-icons/io5";
+import { IoSearchOutline } from "react-icons/io5";
 import Select from 'react-select';
 
-const SearchTodos = ({ setDisplayMode, searchValue, setSearchValue, mode, setMode }) => {
+const SearchTodos = ({ setDisplayMode, setSortingMode, searchValue, setSearchValue }) => {
   const todosOptions = [
-    { value: 'all', label: 'ALL' },
-    { value: 'active', label: 'ACTIVE' },
-    { value: 'completed', label: 'COMPLETED' }
+    { value: 'all', label: 'All' },
+    { value: 'active', label: 'Active' },
+    { value: 'completed', label: 'Completed' }
+  ];
+
+  const sortingOptions = [
+    { value: 'date',label: 'Date'},
+    { value: 'name', label: 'Name'}
   ];
 
   const selectStyles = {
@@ -37,6 +41,10 @@ const SearchTodos = ({ setDisplayMode, searchValue, setSearchValue, mode, setMod
     setDisplayMode(value);
   }
 
+  const handleSortingChange = (value) => {
+    setSortingMode(value);
+  }
+
   return (
     <div className='todos-header'>
       <form onSubmit={(e) => e.preventDefault()}>
@@ -57,9 +65,14 @@ const SearchTodos = ({ setDisplayMode, searchValue, setSearchValue, mode, setMod
         onChange={(choice) => handleDisplayChange(choice.value)}
         styles={selectStyles}
       />
-      <button className='mode-btn' onClick={() => setMode(prev => prev === 'light' ? 'dark' : 'light')}>
-        { mode === 'light' ? <IoSunnyOutline /> : <IoMoonOutline /> }
-      </button>
+      <Select
+        className='todos-sorting'
+        options={sortingOptions}
+        defaultValue={sortingOptions[0]}
+        isSearchable={false}
+        onChange={(choice) => handleSortingChange(choice.value)}
+        styles={selectStyles}
+      />
     </div>
   )
 };

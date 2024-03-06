@@ -1,9 +1,10 @@
 .profile-container {
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .profile-container .profile-header {
   position: relative;
+  top: 1.5rem;
   background-image: url('https://t3.ftcdn.net/jpg/02/99/99/12/360_F_299991216_xFfUhQAHFWHCmdsfX2GF0DvGVdxmq6Id.jpg');
   background-position: center;
   background-size: cover;
