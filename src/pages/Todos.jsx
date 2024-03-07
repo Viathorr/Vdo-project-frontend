@@ -11,8 +11,8 @@ const Todos = () => {
   const { data, isLoading, fetchError } = useAxiosFetch('/todos');
   const [mode, setMode] = useState('light');
   const [searchValue, setSearchValue] = useState('');
-  const [displayMode, setDisplayMode] = useState('all');
-  // TODO Handle todos sorting
+  // TODO Handle todos sorting, filtering and pagination
+   const [filterMode, setFilterMode] = useState('all');
   const [sortingMode, setSortingMode] = useState('date');
   const [addTodoClicked, setAddTodoClicked] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
@@ -43,7 +43,7 @@ const Todos = () => {
         !isLoading && !fetchError && 
         <>
           <SearchTodos 
-            setDisplayMode={setDisplayMode}
+            setFilterMode={setFilterMode}
             setSortingMode={setSortingMode}
             searchValue={searchValue} 
             setSearchValue={setSearchValue} 
@@ -53,18 +53,20 @@ const Todos = () => {
           <TodoList
             todos={
               searchResults || searchValue ?
-                displayMode === 'active'
+                filterMode === 'active'
                 ? searchResults.filter(todo => !todo.checked)
-                : displayMode === 'completed'
+                : filterMode === 'completed'
                   ? searchResults.filter(todo => todo.checked)
                   : searchResults 
                 :
-                displayMode === 'active'
+                filterMode === 'active'
                 ? todos.filter(todo => !todo.checked)
-                : displayMode === 'completed'
+                : filterMode === 'completed'
                   ? todos.filter(todo => todo.checked)
                     : todos
-            } />
+            }
+          />
+          {/* TODO add pagination links container w/ buttons */}
           <AddTodo
             addTodoClicked={addTodoClicked}
             setAddTodoClicked={setAddTodoClicked}

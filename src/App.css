@@ -426,6 +426,9 @@ a {
 .todos-container .add-btn-container {
   display: flex;
   justify-content: flex-end;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
 }
 
 .todos-container .add-todo-btn {

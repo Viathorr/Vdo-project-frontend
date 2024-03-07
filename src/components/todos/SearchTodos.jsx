@@ -9,8 +9,8 @@ const SearchTodos = ({ setDisplayMode, setSortingMode, searchValue, setSearchVal
   ];
 
   const sortingOptions = [
-    { value: 'date',label: 'Date'},
-    { value: 'name', label: 'Name'}
+    { value: 'name', label: 'Name'},
+    { value: 'date',label: 'Date'}
   ];
 
   const selectStyles = {
