@@ -21,7 +21,6 @@ const TodoItem = ({ item }) => {
 
   const handleDelete = async (id) => {
     try {
-      // axiosJWT.defaults.headers.common.Authorization = `Bearer ${auth.accessToken}`;
       await axiosJWT.delete(`/todos/${id}`);
       dispatch(deleteTodo(id));
     } catch (err) {

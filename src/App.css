@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Roboto:wght@400;500&display=swap');
 
 :root {
-  --background-primary-color: #186ca1;
+  --background-primary-color: rgba(38, 106, 178, 0.9);
 }
 
 * {
@@ -309,6 +309,39 @@ a {
   margin-bottom: 2rem;
 }
 
+.todos-container .pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.todos-container .pagination-container .btn {
+  background-color: var(--background-primary-color);
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  color: #fff;
+}
+
+.todos-container .pagination-container .btn:hover {
+  background-color: rgba(38, 106, 178, 0.9);
+}
+
+.todos-container .pagination-container .btn:disabled {
+  background-color: #999;
+  cursor: default;
+}
+
+.todos-container .pagination-container .page-num {
+  font-size: 1.1rem;
+  font-weight: 500;
+  border-bottom: 1px solid #000;
+  padding: 0.2rem;
+}
+
 .todos-header form {
   position: relative;
   width: 100%;
@@ -341,12 +374,19 @@ a {
   font-weight: 500;
 }
 
+.todos-header .todos-select-div {
+  width: 220px;
+}
+
 .todos-header .todos-sorting-div .sort-by,
 .todos-header .todos-select-div .filter-by {
   position: absolute;
   top: -2rem;
   left: 2rem;
-  
+}
+
+.todos-header .todos-select-div .filter-by {
+  left: 2.5rem;
 }
 
 .todos-header .todos-select,

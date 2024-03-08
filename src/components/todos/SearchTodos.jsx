@@ -1,7 +1,7 @@
 import { IoSearchOutline } from "react-icons/io5";
 import Select from 'react-select';
 
-const SearchTodos = ({ setDisplayMode, setSortingMode, searchValue, setSearchValue }) => {
+const SearchTodos = ({ filterMode, sortingMode, setFilterMode, setSortingMode, searchValue, setSearchValue }) => {
   const todosOptions = [
     { value: 'all', label: 'All' },
     { value: 'active', label: 'Active' },
@@ -37,12 +37,12 @@ const SearchTodos = ({ setDisplayMode, setSortingMode, searchValue, setSearchVal
     })
   };
 
-  const handleDisplayChange = (value) => {
-    setDisplayMode(value);
+  const handleDisplayChange = (choice) => {
+    setFilterMode(choice);
   }
 
-  const handleSortingChange = (value) => {
-    setSortingMode(value);
+  const handleSortingChange = (choice) => {
+    setSortingMode(choice);
   }
 
   return (
@@ -60,24 +60,24 @@ const SearchTodos = ({ setDisplayMode, setSortingMode, searchValue, setSearchVal
       <div className="todos-select-div">
         <div className="filter-by">Filter by</div>
         <Select
-        className='todos-select'
-        options={todosOptions}
-        defaultValue={todosOptions[0]}
-        isSearchable={false}
-        onChange={(choice) => handleDisplayChange(choice.value)}
-        styles={selectStyles}
-      /> 
+          className='todos-select'
+          options={todosOptions}
+          defaultValue={filterMode}
+          isSearchable={false}
+          onChange={(choice) => handleDisplayChange(choice)}
+          styles={selectStyles}
+        />
       </div>
       <div className="todos-sorting-div">
         <div className="sort-by">Sort by</div>
         <Select
-        className='todos-sorting'
-        options={sortingOptions}
-        defaultValue={sortingOptions[0]}
-        isSearchable={false}
-        onChange={(choice) => handleSortingChange(choice.value)}
-        styles={selectStyles}
-      />
+          className='todos-sorting'
+          options={sortingOptions}
+          defaultValue={sortingMode}
+          isSearchable={false}
+          onChange={(choice) => handleSortingChange(choice)}
+          styles={selectStyles}
+        />
       </div>
     </div>
   )
