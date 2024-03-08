@@ -1,7 +1,11 @@
 import { IoSearchOutline } from "react-icons/io5";
 import Select from 'react-select';
+import { useDispatch, useSelector } from "react-redux";
+import { setFilterMode, setSortingMode } from "../../features/todos/todos";
 
-const SearchTodos = ({ filterMode, sortingMode, setFilterMode, setSortingMode, searchValue, setSearchValue }) => {
+const SearchTodos = ({ searchValue, setSearchValue }) => {
+  const todosInfo = useSelector(state => state.todos.value);
+  const dispatch = useDispatch();
   const todosOptions = [
     { value: 'all', label: 'All' },
     { value: 'active', label: 'Active' },
@@ -38,11 +42,11 @@ const SearchTodos = ({ filterMode, sortingMode, setFilterMode, setSortingMode, s
   };
 
   const handleDisplayChange = (choice) => {
-    setFilterMode(choice);
+    dispatch(setFilterMode(choice));
   }
 
   const handleSortingChange = (choice) => {
-    setSortingMode(choice);
+    dispatch(setSortingMode(choice));
   }
 
   return (
@@ -62,7 +66,7 @@ const SearchTodos = ({ filterMode, sortingMode, setFilterMode, setSortingMode, s
         <Select
           className='todos-select'
           options={todosOptions}
-          defaultValue={filterMode}
+          defaultValue={todosInfo.filterMode}
           isSearchable={false}
           onChange={(choice) => handleDisplayChange(choice)}
           styles={selectStyles}
@@ -73,7 +77,7 @@ const SearchTodos = ({ filterMode, sortingMode, setFilterMode, setSortingMode, s
         <Select
           className='todos-sorting'
           options={sortingOptions}
-          defaultValue={sortingMode}
+          defaultValue={todosInfo.sortingMode}
           isSearchable={false}
           onChange={(choice) => handleSortingChange(choice)}
           styles={selectStyles}

@@ -1,10 +1,11 @@
 import React, { useState, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addTodo } from '../../features/todos/todos';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 
-const AddTodo = ({ addTodoClicked, setAddTodoClicked }) => {
+const AddTodo = ({ addTodoClicked, setAddTodoClicked, fetchTodos }) => {
   const [todo, setTodo] = useState('');
+  const todosInfo = useSelector(state => state.todos.value);
   const todoNameRef = useRef();
   const dispatch = useDispatch();
   const axiosJWT = useAxiosPrivate();
@@ -15,6 +16,7 @@ const AddTodo = ({ addTodoClicked, setAddTodoClicked }) => {
       const response = await axiosJWT.post('/todos', { name: todo });
       const newTodo = response.data;
       dispatch(addTodo({ ...newTodo, name: todo}));
+      await fetchTodos();
     } catch (err) {
       console.log(`Error: ${err.message}`);
     }

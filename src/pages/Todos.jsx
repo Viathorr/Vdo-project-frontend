@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import SearchTodos from '../components/todos/SearchTodos';
 import TodoList from '../components/todos/TodoList';
 import { FaPlus } from "react-icons/fa6";
@@ -11,20 +11,17 @@ import Pagination from "../components/todos/Pagination";
  
 const Todos = () => {
   const [url, setUrl] = useState('/todos');
-  const { data, isLoading, fetchError } = useAxiosFetch(url);
+  const { data, isLoading, fetchError, setData } = useAxiosFetch(url);
   const [mode, setMode] = useState('light');
   const [searchValue, setSearchValue] = useState('');
   const [page, setPage] = useState(1);
   const [nextPage, setNextPage] = useState(null);
   const [prevPage, setPrevPage] = useState(null);
-  // TODO Handle todos sorting, filtering and pagination
-  const [filterMode, setFilterMode] = useState({ value: 'all', label: 'All' });
-  const [sortingMode, setSortingMode] = useState({ value: 'name', label: 'Name' });
   const [addTodoClicked, setAddTodoClicked] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
-  const axiosJWT = useAxiosPrivate();
-  const todos = useSelector(state => state.todos.value);
+  const todosInfo = useSelector(state => state.todos.value);
   const dispatch = useDispatch();
+  const axiosJWT = useAxiosPrivate();
 
   useEffect(() => {
     setNextPage(data.nextPage ? data.nextPage : null);
@@ -35,21 +32,27 @@ const Todos = () => {
   }, [data, dispatch]);
 
   useEffect(() => {
-    const filteredResults = todos?.filter(todo => ((todo.name).toLowerCase()).includes(searchValue.toLowerCase())) || [];
+    const filteredResults = todosInfo.todos?.filter(todo => ((todo.name).toLowerCase()).includes(searchValue.toLowerCase())) || [];
     setSearchResults(filteredResults);
-  }, [todos, searchValue]);
+  }, [todosInfo.todos, searchValue]);
 
   useEffect(() => {
-    setUrl(`/todos?page=${page}&filter=6&s=${sortingMode.value}&f=${filterMode.value}`);
+    setUrl(`/todos?page=${page}&filter=6&s=${todosInfo.sortingMode.value}&f=${todosInfo.filterMode.value}`);
   }, [page]);
 
   useEffect(() => {
     if (page !== 1) {
       setPage(1);
     } else {
-      setUrl(`/todos?page=1&filter=6&s=${sortingMode.value}&f=${filterMode.value}`);
+      setUrl(`/todos?page=1&filter=6&s=${todosInfo.sortingMode.value}&f=${todosInfo.filterMode.value}`);
     }
-  }, [sortingMode, filterMode]);
+  }, [todosInfo.sortingMode, todosInfo.filterMode]);
+
+
+  const fetchTodos = async () => {
+    const response = await axiosJWT.get(`/todos?page=${page}&limit=6&s=${todosInfo.sortingMode.value}&f=${todosInfo.filterMode.value}`);
+    setData(response.data ? response.data : {});
+  };
 
   const toggleAddTodoClicked = () => {
     setAddTodoClicked(prev => !prev);
@@ -64,10 +67,6 @@ const Todos = () => {
         !isLoading && !fetchError && 
         <>
           <SearchTodos
-            sortingMode={sortingMode}
-            filterMode={filterMode}
-            setFilterMode={setFilterMode}
-            setSortingMode={setSortingMode}
             searchValue={searchValue} 
             setSearchValue={setSearchValue} 
             mode={mode} 
@@ -77,13 +76,15 @@ const Todos = () => {
             todos={
               searchResults || searchValue
                   ? searchResults
-                  : todos
+                  : todosInfo.todos
             }
+            fetchTodos={fetchTodos}
           />
           <Pagination page={page} nextPage={nextPage} prevPage={prevPage} setPage={setPage} />
           <AddTodo
             addTodoClicked={addTodoClicked}
             setAddTodoClicked={setAddTodoClicked}
+            fetchTodos={fetchTodos}
           />
           <div className='add-btn-container'>
             <button className='add-todo-btn' onClick={() => toggleAddTodoClicked()}><FaPlus /></button>
