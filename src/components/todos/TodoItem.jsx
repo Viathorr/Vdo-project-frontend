@@ -1,10 +1,8 @@
-import { AiFillDelete } from "react-icons/ai";
-import { useDispatch, useSelector } from 'react-redux';
-import { toggleCheckTodo, deleteTodo, updateTodos } from '../../features/todos/todos';
+import { AiFillDelete, AiFillEdit } from "react-icons/ai";
+import { useSelector } from 'react-redux';
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
  
-const TodoItem = ({ item, fetchTodos }) => {
-  const dispatch = useDispatch();
+const TodoItem = ({ item, fetchTodos, setUpdateTodoClicked }) => {
   const todosInfo = useSelector(state => state.todos.value);
   const axiosJWT = useAxiosPrivate();
 
@@ -42,8 +40,7 @@ const TodoItem = ({ item, fetchTodos }) => {
     const neededTodo = todosInfo.todos.find(todo => todo.id === id);
     const updatedTodo = { ...neededTodo, checked: !neededTodo.checked };
     try {
-      await axiosJWT.put(`/todos/${id}`, updatedTodo);
-      dispatch(toggleCheckTodo(id));
+      await axiosJWT.put(`/todos?id=${id}`, updatedTodo);
       await fetchTodos();
     } catch (err) {
       console.log(err.message);
@@ -52,8 +49,7 @@ const TodoItem = ({ item, fetchTodos }) => {
 
   const handleDelete = async (id) => {
     try {
-      await axiosJWT.delete(`/todos/${id}`);
-      dispatch(deleteTodo(id));
+      await axiosJWT.delete(`/todos?id=${id}`);
       await fetchTodos();
     } catch (err) {
       console.log(err.message);
@@ -84,7 +80,10 @@ const TodoItem = ({ item, fetchTodos }) => {
         >{item.deadline?.toLocaleTimeString([], { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</div>)
         : null
       }
-      <button className='delete-btn' onClick={() => handleDelete(item.id)}><AiFillDelete /></button>
+      <div>
+        <button className="update-btn" onClick={() => setUpdateTodoClicked({ clicked: true, todo: item })}><AiFillEdit /></button>
+        <button className='delete-btn' onClick={() => handleDelete(item.id)}><AiFillDelete /></button>  
+      </div>
     </li>
   )
 };

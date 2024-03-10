@@ -439,7 +439,7 @@ a {
 
 .todo-list .todo-item .deadline-label {
   position: absolute;
-  right: 4.5rem;
+  right: 7rem;
   top: 0.25rem;
 }
 
@@ -467,7 +467,8 @@ a {
   text-decoration: line-through;
 }
 
-.todo-list .todo-item .delete-btn {
+.todo-list .todo-item .delete-btn,
+.todo-list .todo-item .update-btn {
   width: 2rem;
   height: 2rem;
   font-size: 1.25rem;
@@ -478,7 +479,8 @@ a {
   color: #333;
 }
 
-.todo-list .todo-item .delete-btn:hover {
+.todo-list .todo-item .delete-btn:hover,
+.todo-list .todo-item .update-btn:hover {
   color: #000;
   background-color: #125884;
 }
@@ -508,7 +510,7 @@ a {
   background-color: #125884;
 }
 
-.add-todo-window,
+.todo-window,
 .logout-window,
 .delete-window {
   display: flex;
@@ -527,36 +529,14 @@ a {
   transition: 0.3s;
 }
 
-/* .logout-window {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 5;
-  background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.logout-window.open {
-  opacity: 1;
-  pointer-events: all;
-} */
-
-.add-todo-window.open,
+.todo-window.open,
 .logout-window.open,
 .delete-window.open {
   opacity: 1;
   pointer-events: all;
 }
 
-.add-todo-window .add-todo-content,
+.todo-window .todo-content,
 .logout-window .logout-window-content,
 .delete-window .delete-window-content {
   background-color: #fff;
@@ -565,22 +545,18 @@ a {
   border: 2px solid var(--background-primary-color);
 }
 
-.add-todo-window .add-todo-content .react-datepicker-popper {
- z-index: 1000;
-}
-
-.add-todo-window .add-todo-title {
+.todo-window .todo-content .todo-info-title {
   margin-bottom: 1rem;
 }
 
-.add-todo-window .add-todo-form {
+.todo-window .todo-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.add-todo-window .add-todo-form input {
+.todo-window .todo-form input {
   font-size: 1rem;
   width: 100%;
   height: 100%;
@@ -590,12 +566,12 @@ a {
   border-radius: 0.25rem;
 }
 
-.add-todo-window .add-todo-form .todo-name-input,
-.add-todo-window .add-todo-form .todo-deadline-container {
+.todo-window .todo-form .todo-name-input,
+.todo-window .todo-form .todo-deadline-container {
   margin-bottom: 1rem;
 }
 
-.add-todo-window .add-todo-form .btn {
+.todo-window .todo-form .btn {
   font-size: 0.9rem;
   border: none;
   color: #fff;
@@ -604,19 +580,19 @@ a {
   border-radius: 0.25rem;
 }
 
-.add-todo-window .add-todo-form .btn:first-of-type {
+.todo-window .todo-form .btn:first-of-type {
   background-color: #c1c1c1;
 }
 
-.add-todo-window .add-todo-form .btn:first-of-type:hover {
+.todo-window .todo-form .btn:first-of-type:hover {
   background-color: #a3a3a3;
 }
 
-.add-todo-window .add-todo-form .btn:last-of-type {
+.todo-window .todo-form .btn:last-of-type {
   background-color: var(--background-primary-color);
 }
 
-.add-todo-window .add-todo-form .btn:last-of-type:hover {
+.todo-window .todo-form .btn:last-of-type:hover {
   background-color: #125884;
 }
 

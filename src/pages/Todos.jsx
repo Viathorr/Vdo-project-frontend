@@ -8,6 +8,7 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useDispatch, useSelector } from 'react-redux';
 import { updateTodos } from '../features/todos/todos';
 import Pagination from "../components/todos/Pagination";
+import UpdateTodo from '../components/todos/UpdateTodo';
  
 const Todos = () => {
   const [url, setUrl] = useState('/todos');
@@ -17,7 +18,8 @@ const Todos = () => {
   const [page, setPage] = useState(1);
   const [nextPage, setNextPage] = useState(null);
   const [prevPage, setPrevPage] = useState(null);
-  const [addTodoClicked, setAddTodoClicked] = useState(false);
+  const [addTodoClicked, setAddTodoClicked] = useState({ clicked: false});
+  const [updateTodoClicked, setUpdateTodoClicked] = useState({ clicked: false, todo: null });
   const [searchResults, setSearchResults] = useState([]);
   const todosInfo = useSelector(state => state.todos.value);
   const dispatch = useDispatch();
@@ -56,7 +58,7 @@ const Todos = () => {
   };
 
   const toggleAddTodoClicked = () => {
-    setAddTodoClicked(prev => !prev);
+    setAddTodoClicked(prev => ({ clicked: !(prev.clicked)}));
   };
 
   return (
@@ -80,11 +82,17 @@ const Todos = () => {
                   : todosInfo.todos
             }
             fetchTodos={fetchTodos}
+            setUpdateTodoClicked={setUpdateTodoClicked}
           />
           <Pagination page={page} nextPage={nextPage} prevPage={prevPage} setPage={setPage} />
           <AddTodo
             addTodoClicked={addTodoClicked}
             setAddTodoClicked={setAddTodoClicked}
+            fetchTodos={fetchTodos}
+          />
+          <UpdateTodo
+            updateTodoClicked={updateTodoClicked}
+            setUpdateTodoClicked={setUpdateTodoClicked}
             fetchTodos={fetchTodos}
           />
           <div className='add-btn-container'>
