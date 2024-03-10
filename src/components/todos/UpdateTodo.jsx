@@ -14,12 +14,12 @@ const UpdateTodo = ({ updateTodoClicked, setUpdateTodoClicked, fetchTodos }) => 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // try {
-    //   await axiosJWT.put(`/todos?id=${updateTodoClicked.todo.id}`, { name: todoName, deadline });
-    //   await fetchTodos();
-    // } catch (err) {
-    //   console.log(`Error: ${err.message}`);
-    // }
+    try {
+      await axiosJWT.put(`/todos?id=${updateTodoClicked.todo.id}`, { name: todoName, deadline });
+      await fetchTodos();
+    } catch (err) {
+      console.log(`Error: ${err.message}`);
+    }
      
     setTodoName('');
     setDeadline(null);
