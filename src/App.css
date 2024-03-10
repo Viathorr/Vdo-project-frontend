@@ -36,7 +36,7 @@ a {
   left: 0;
   right: 0;
   padding: 1.2rem;
-  z-index: 10;
+  z-index: 1;
 }
 
 .navbar a,
@@ -545,6 +545,10 @@ a {
   border: 2px solid var(--background-primary-color);
 }
 
+.add-todo-window .add-todo-content .react-datepicker-popper {
+ z-index: 1000;
+}
+
 .add-todo-window .add-todo-title {
   margin-bottom: 1rem;
 }
@@ -562,9 +566,13 @@ a {
   height: 100%;
   text-align: start;
   padding: 0.25rem 0.5rem 0.25rem 0.5rem;
-  margin-bottom: 1rem;
   border: 1px solid var(--background-primary-color);
   border-radius: 0.25rem;
+}
+
+.add-todo-window .add-todo-form .todo-name-input,
+.add-todo-window .add-todo-form .todo-deadline-container {
+  margin-bottom: 1rem;
 }
 
 .add-todo-window .add-todo-form .btn {

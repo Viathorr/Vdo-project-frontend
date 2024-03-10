@@ -27,7 +27,8 @@ const Todos = () => {
     setNextPage(data.nextPage ? data.nextPage : null);
     setPrevPage(data.prevPage ? data.prevPage : null);
     dispatch(updateTodos(data.todos?.map(todo => {
-      return { id: todo.id, name: todo.name, checked: todo.checked }
+      console.log(todo.deadline);
+      return { id: todo.id, name: todo.name, checked: todo.checked, deadline: todo.deadline }
     })));
   }, [data, dispatch]);
 
