@@ -1,6 +1,6 @@
 import useAxiosFetch from '../../hooks/useAxiosFetch';
 import './Profile.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { FcOk, FcClock, FcCollaboration } from "react-icons/fc";
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../../features/auth/user';
@@ -8,15 +8,16 @@ import { setUser } from '../../features/auth/user';
 const Profile = () => {
   const { data, isLoading, fetchError } = useAxiosFetch('/user');
   const user = useSelector(state => state.user.value);
-  const userInfo = {
-    completedTodos: 23,
+  const [userInfo, setUserInfo] = useState({
+    completedTodos: 0,
     askedQuestions: 4,
-    leftTodos: 7
-  };
+    leftTodos: 0
+  })
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setUser({ ...user, name: data.name, country: data.country, email: data.email, phoneNumber: data.phoneNum }));
+    dispatch(setUser({ ...user, name: data.name, country: data.country, email: data.email, phoneNumber: data.phoneNum, profileImage: data.profilePicture }));
+    setUserInfo(prev => ({ ...prev, completedTodos: data.completedTodos, leftTodos: data.leftTodos }));
   }, [data, dispatch]);
 
   return (

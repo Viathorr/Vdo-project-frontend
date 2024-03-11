@@ -4,6 +4,8 @@ import DayCard from "../components/classes/DayCard";
 
 const Classes = () => {
   const { data, isLoading, fetchError } = useAxiosFetch('/schedule');
+  const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  const [activities, setActivities] = useState([]);
   const [days, setDays] = useState([]);
 
   useEffect(() => {

@@ -208,9 +208,9 @@ a {
 /* Classes */
 .classes-container {
   padding: 3rem 2rem;
-  background-image: url('https://64.media.tumblr.com/f4da6299b5f0732883a6f20ced7cc17d/tumblr_psrvm75GO21y1i3juo1_1280.jpg');
+  /* background-image: url('https://64.media.tumblr.com/f4da6299b5f0732883a6f20ced7cc17d/tumblr_psrvm75GO21y1i3juo1_1280.jpg');
   background-size: cover;
-  background-position: center;
+  background-position: center; */
 }
 
 .classes-container .title {
