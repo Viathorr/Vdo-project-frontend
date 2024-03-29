@@ -269,6 +269,11 @@ a {
   border-bottom: 2px solid #8d824c;
 }
 
+.day-card .day-subjects .subject.empty {
+  height: 2rem;
+  width: 500px;
+}
+
 .day-card .day-subjects .subject .class-time {
   font-weight: bold;
   margin-right: 2rem;
@@ -485,7 +490,7 @@ a {
   background-color: #125884;
 }
 
-.todos-container .add-btn-container {
+.add-btn-container {
   display: flex;
   justify-content: flex-end;
   position: fixed;
@@ -493,7 +498,7 @@ a {
   right: 1rem;
 }
 
-.todos-container .add-todo-btn {
+.add-btn-container .add-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -512,7 +517,8 @@ a {
 
 .todo-window,
 .logout-window,
-.delete-window {
+.delete-window,
+.activity-window {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -531,14 +537,16 @@ a {
 
 .todo-window.open,
 .logout-window.open,
-.delete-window.open {
+.delete-window.open,
+.activity-window.open {
   opacity: 1;
   pointer-events: all;
 }
 
 .todo-window .todo-content,
 .logout-window .logout-window-content,
-.delete-window .delete-window-content {
+.delete-window .delete-window-content,
+.activity-window .activity-content {
   background-color: #fff;
   padding: 2rem;
   border-radius: 1rem;
@@ -549,7 +557,8 @@ a {
   margin-bottom: 1rem;
 }
 
-.todo-window .todo-form {
+.todo-window .todo-form,
+.activity-window .activity-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -571,7 +580,8 @@ a {
   margin-bottom: 1rem;
 }
 
-.todo-window .todo-form .btn {
+.todo-window .todo-form .btn,
+.activity-window .activity-form .btn {
   font-size: 0.9rem;
   border: none;
   color: #fff;
@@ -580,19 +590,23 @@ a {
   border-radius: 0.25rem;
 }
 
-.todo-window .todo-form .btn:first-of-type {
+.todo-window .todo-form .btn:first-of-type,
+.activity-window .activity-form .btn:first-of-type {
   background-color: #c1c1c1;
 }
 
-.todo-window .todo-form .btn:first-of-type:hover {
+.todo-window .todo-form .btn:first-of-type:hover,
+.activity-window .activity-form .btn:first-of-type:hover {
   background-color: #a3a3a3;
 }
 
-.todo-window .todo-form .btn:last-of-type {
+.todo-window .todo-form .btn:last-of-type,
+.activity-window .activity-form .btn:last-of-type {
   background-color: var(--background-primary-color);
 }
 
-.todo-window .todo-form .btn:last-of-type:hover {
+.todo-window .todo-form .btn:last-of-type:hover,
+.activity-window .activity-form .btn:last-of-type:hover {
   background-color: #125884;
 }
 

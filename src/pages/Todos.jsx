@@ -96,7 +96,7 @@ const Todos = () => {
             fetchTodos={fetchTodos}
           />
           <div className='add-btn-container'>
-            <button className='add-todo-btn' onClick={() => toggleAddTodoClicked()}><FaPlus /></button>
+            <button className='add-btn' onClick={() => toggleAddTodoClicked()}><FaPlus /></button>
           </div>
         </>
       }
