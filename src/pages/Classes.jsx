@@ -4,6 +4,7 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import DayCard from "../components/classes/DayCard";
 import { FaPlus } from "react-icons/fa6";
 import AddActivity from "../components/activities/AddActivity";
+import UpdateActivity from "../components/activities/UpdateActivity";
 
 const Classes = () => {
   const { data, isLoading, fetchError } = useAxiosFetch('/schedule');
@@ -11,22 +12,93 @@ const Classes = () => {
     {
       id: 1,
       dayName: 'Monday',
-      activities: []
+      activities: [
+        {
+          id: 1,
+          name: 'Something',
+          time: '10:00',
+          url: 'http://localhost:3000'
+        },
+        {
+          id: 2,
+          name: 'Smth else',
+          time: '12:00',
+          url: ''
+        },
+        {
+          id: 3,
+          name: 'Smth else 3',
+          time: '14:00',
+          url: ''
+        }, {}, {}
+      ]
     },
     {
       id: 2,
       dayName: 'Tuesday',
-      activities: []
+      activities: [
+        {
+          id: 43,
+          name: 'Something',
+          time: '10:00',
+          url: 'http://localhost:3000'
+        },
+        {
+          id: 212,
+          name: 'Smth else',
+          time: '12:00',
+          url: ''
+        },
+        {
+          id: 32,
+          name: 'Smth else 3',
+          time: '14:00',
+          url: ''
+        }, {}, {}
+      ]
     },
     {
       id: 3,
       dayName: 'Wednesday',
-      activities: []
+      activities: [
+        {
+          id: 11,
+          name: 'Something',
+          time: '10:00',
+          url: 'http://localhost:3000'
+        },
+        {
+          id: 22,
+          name: 'Smth else',
+          time: '11:00',
+          url: ''
+        },
+        {
+          id: 331,
+          name: 'Smth else 3',
+          time: '16:00',
+          url: ''
+        }, {}, {}
+      ]
     },
     {
       id: 4,
       dayName: 'Thursday',
-      activities: []
+      activities: [
+        {
+          id: 12,
+          name: 'Something',
+          time: '14:00',
+          url: 'http://localhost:3000'
+        },
+        {
+          id: 215,
+          name: 'Smth else',
+          time: '22:00',
+          url: ''
+        },
+        {}, {}, {}
+      ]
     },
     {
       id: 5,
@@ -36,7 +108,21 @@ const Classes = () => {
     {
       id: 6,
       dayName: 'Saturday',
-      activities: []
+      activities: [
+        {
+          id: 109,
+          name: 'Something',
+          time: '10:00',
+          url: 'http://localhost:3000'
+        },
+        {
+          id: 28,
+          name: 'Smth else',
+          time: '17:00',
+          url: ''
+        },
+        {}, {}, {}
+      ]
     },
     {
       id: 7,
@@ -44,7 +130,15 @@ const Classes = () => {
       activities: []
     },
   ];
-  const [addActivityClicked, setAddActivityClicked] = useState({ clicked: false});
+  const [addActivityClicked, setAddActivityClicked] = useState({ clicked: false });
+  const [updateActivityClicked, setUpdateActivityClicked] = useState({ clicked: false, activity: null });
+  // const [updateActivityClicked, setUpdateActivityClicked] = useState({
+  //   clicked: true, activity: {
+  //     name: 'Smth',
+  //     day: 'Friday',
+  //     time: '10:00',
+  //     url: 'http://localhost:4000'
+  // } });
   const [days, setDays] = useState([]);
   const axiosJWT = useAxiosPrivate();
 
@@ -81,12 +175,17 @@ const Classes = () => {
             <div className="days-container">
             { 
               weekDays.map(day => (
-                <DayCard key={day.id} day={day} />
+                <DayCard key={day.id} day={day} setUpdateActivityClicked={setUpdateActivityClicked} fetchActivities={fetchActivities}/>
               ))
             }
           </div>
       }
-      <AddActivity addActivityClicked={addActivityClicked} setAddActivityClicked={setAddActivityClicked} fetchActivities={fetchActivities}/>
+      <AddActivity addActivityClicked={addActivityClicked} setAddActivityClicked={setAddActivityClicked} fetchActivities={fetchActivities} />
+      {updateActivityClicked.clicked ? (
+        <UpdateActivity updateActivityClicked={updateActivityClicked} setUpdateActivityClicked={setUpdateActivityClicked} fetchActivities={fetchActivities}/>
+      ) :
+        null
+      }
       <div className='add-btn-container'>
         <button className='add-btn' onClick={() => toggleAddActivityClicked()}><FaPlus /></button>
       </div>

@@ -274,6 +274,28 @@ a {
   width: 500px;
 }
 
+.day-card .day-subjects .update-btn {
+  margin-right: 0.5rem;
+}
+
+.day-card .day-subjects .delete-btn,
+.day-card .day-subjects .update-btn {
+  width: 2rem;
+  height: 2rem;
+  font-size: 1.25rem;
+  border: none;
+  background-color: var(--background-primary-color);
+  border-radius: 0.25rem;
+  padding-top: 4px;
+  color: #333;
+}
+
+.day-card .day-subjects .delete-btn:hover,
+.day-card .day-subjects .update-btn:hover {
+  color: #000;
+  background-color: #125884;
+}
+
 .day-card .day-subjects .subject .class-time {
   font-weight: bold;
   margin-right: 2rem;
@@ -284,7 +306,7 @@ a {
   transition: all 0.2s;
 }
 
-.day-card .day-subjects .subject .subject-name:hover {
+.day-card .day-subjects .subject a.subject-name:hover {
   text-decoration: underline;
 }
 
@@ -553,7 +575,8 @@ a {
   border: 2px solid var(--background-primary-color);
 }
 
-.todo-window .todo-content .todo-info-title {
+.todo-window .todo-content .todo-info-title,
+.activity-window .activity-content .activity-info-title {
   margin-bottom: 1rem;
 }
 
@@ -565,7 +588,8 @@ a {
   align-items: center;
 }
 
-.todo-window .todo-form input {
+.todo-window .todo-form input,
+.activity-window .activity-form .activity-input {
   font-size: 1rem;
   width: 100%;
   height: 100%;
@@ -608,6 +632,46 @@ a {
 .todo-window .todo-form .btn:last-of-type:hover,
 .activity-window .activity-form .btn:last-of-type:hover {
   background-color: #125884;
+}
+
+/* Activity info */
+.activity-window .activity-form .activity-input {
+  margin: 0.5rem;
+}
+
+.activity-window .activity-form .time-picker-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.activity-window .activity-form .time-picker {
+  width: 160px;
+  margin: 0.5rem 0.25rem;
+  border: 1px solid var(--background-primary-color);
+  border-radius: 0.25rem;
+  font-size: 1rem;
+}
+
+.rw-time-part-input {
+  padding: 0 0.25rem;
+}
+
+.activity-window .activity-form .day-dropdown-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.activity-window .activity-form .dropdown-list {
+  width: 160px;
+  margin: 0.5rem 0.25rem;
+  border: 1px solid var(--background-primary-color);
+  border-radius: 0.25rem;
+  font-size: 1rem;
 }
 
 /* Login and Sign up*/

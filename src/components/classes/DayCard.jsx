@@ -1,27 +1,34 @@
 import React from 'react';
+import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 
-const DayCard = ({ day }) => {
+const DayCard = ({ day, setUpdateActivityClicked, fetchActivities }) => {
   const keys = [1, 2, 3, 4, 5];
+
+  const handleDelete = async (id) => {
+
+  };
+
   return (
     <div key={day.id} className='day-card'>
       <div className='day-name'>
         <p>{day.dayName}</p>
       </div>
-      {/* <div className='day-subjects'>
-        {day.classes.map(subject => (
-          <div className='subject' key={k++}>
-            <span className='class-time'>{subject.beginningTime} - {subject.endTime} </span>
-            <a className='subject-name' href={subject.url} target="_blank" rel="noopener noreferrer">{subject.subject}</a>
-            <span className='class-type'>{subject.type}</span>
-          </div>
-        ))}
-      </div> */}
       <div className='day-subjects'>
         { day.activities.length ? day.activities.map(activity => (
-          <div className='subject' key={activity.id}>
-            <span className='class-time'>{activity.beginningTime} - {activity.endTime} </span>
-            <a className='subject-name' href={activity.url} target="_blank" rel="noopener noreferrer">{activity.subject}</a>
-            <span className='class-type'>{activity.type}</span>
+          <div className={`subject ${activity.id ? 'non-empty' : 'empty'}`} key={activity.id}>
+            <span className='class-time'>{activity.time}</span>
+            {activity.url ? (
+              <a className='subject-name' href={activity.url} target="_blank" rel="noopener noreferrer">{activity.name}</a>
+            ) :
+              <p className='subject-name'>{activity.name}</p>
+            }
+            { activity.id ? (
+              <div className='btns-container'>
+                <button className='update-btn' onClick={() => setUpdateActivityClicked({ clicked: true, activity: { ...activity, day: day.dayName }})}><AiFillEdit /></button>
+                <button className='delete-btn' onClick={() => handleDelete(activity.id)}><AiFillDelete /></button>  
+              </div>
+            ) : null
+            }
           </div>
         )) : (
             keys.map(id => (

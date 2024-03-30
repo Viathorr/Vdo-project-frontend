@@ -1,20 +1,56 @@
 import { useState } from 'react';
-import TimePicker from 'react-time-picker';
+import DropdownList from "react-widgets/DropdownList";
+import TimeInput from "react-widgets/TimeInput";
+import "react-widgets/styles.css";
 import 'react-time-picker/dist/TimePicker.css';
 
 // ref TodoInfo
 const ActivityInfo = ({ name, setName, dayName, setDayName, time, setTime, url, setUrl, handleSubmit, setBtnClicked }) => {
   // add dayName select options and combobox
+  const [hours, minutes] = time.split(':').map(str => parseInt(str));
+  const customDate = new Date();
+  customDate.setHours(hours);
+  customDate.setMinutes(minutes);
+  customDate.setSeconds(0);
+  const [date, setDate] = useState(customDate);
   return (
     <form className="activity-form">
-      <div className='time-picker'>
-        <TimePicker
-          value={time}
-          onChange={(time) => {
-            setTime(time);
-            console.log(time);
+      <input
+        className='activity-input'
+        type="text"
+        placeholder='Activity name'
+        value={name}
+        required
+        onChange={(e) => setName(e.target.value)}
+      />
+      <input
+        className='activity-input'
+        type="text"
+        placeholder='Meeting URL (if exists)'
+        value={url}
+        onChange={(e) => setUrl(e.target.value)}
+      />
+      <div className='day-dropdown-container'>
+        <label htmlFor="day-dropdown">Day:</label>
+        <DropdownList
+          className='dropdown-list'
+          id='day-dropdown'
+          filter={false}
+          defaultValue={dayName}
+          data={["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]}
+          onChange={value => setDayName(value)}
+        />
+      </div>
+      <div className='time-picker-container'>
+        <label htmlFor="time-picker">Time:</label>
+        <TimeInput
+          className='time-picker'
+          id='time-picker'
+          value={date}
+          onChange={(date) => {
+            setDate(date);
+            setTime(date.toTimeString().split(' ')[0].slice(0, 5));
           }}
-          disableClock
         />
       </div>
       <div>

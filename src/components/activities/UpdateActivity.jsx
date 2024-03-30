@@ -2,11 +2,11 @@ import { useState } from "react";
 import ActivityInfo from "./ActivityInfo";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
-const AddActivity = ({ addActivityClicked, setAddActivityClicked, fetchActivities }) => {
-  const [name, setName] = useState('');
-  const [dayName, setDayName] = useState('Monday');
-  const [time, setTime] = useState('10:00');
-  const [url, setUrl] = useState('');
+const UpdateActivity = ({ updateActivityClicked, setUpdateActivityClicked, fetchActivities }) => {
+  const [name, setName] = useState(updateActivityClicked.activity?.name);
+  const [dayName, setDayName] = useState(updateActivityClicked.activity?.day);
+  const [time, setTime] = useState(updateActivityClicked.activity?.time);
+  const [url, setUrl] = useState(updateActivityClicked.activity?.url ? updateActivityClicked.activity.url : '');
   const axiosJWT = useAxiosPrivate();
 
   const handleSubmit = async (e) => {
@@ -22,13 +22,13 @@ const AddActivity = ({ addActivityClicked, setAddActivityClicked, fetchActivitie
     setDayName('');
     setTime('');
     setUrl('');
-    setAddActivityClicked({ clicked: false});
+    setUpdateActivityClicked({ clicked: false});
   };
 
   return (
-    <div className={addActivityClicked.clicked ? 'activity-window open' : 'activity-window'}>
+    <div className={updateActivityClicked.clicked ? 'activity-window open' : 'activity-window'}>
       <div className='activity-content'>
-        <h2 className='activity-info-title'>ADD ACTIVITY</h2>
+        <h2 className='activity-info-title'>UPDATE ACTIVITY</h2>
         <ActivityInfo
           name={name}
           setName={setName}
@@ -39,11 +39,11 @@ const AddActivity = ({ addActivityClicked, setAddActivityClicked, fetchActivitie
           url={url}
           setUrl={setUrl}
           handleSubmit={handleSubmit}
-          setBtnClicked={setAddActivityClicked}
+          setBtnClicked={setUpdateActivityClicked}
         />
       </div>
     </div>
   )
 };
 
-export default AddActivity;
+export default UpdateActivity;
