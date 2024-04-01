@@ -3,6 +3,7 @@ import ActivityInfo from "./ActivityInfo";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 const UpdateActivity = ({ updateActivityClicked, setUpdateActivityClicked, fetchActivities }) => {
+  const [error, setError] = useState('');
   const [name, setName] = useState(updateActivityClicked.activity?.name);
   const [dayName, setDayName] = useState(updateActivityClicked.activity?.day);
   const [time, setTime] = useState(updateActivityClicked.activity?.time);
@@ -13,18 +14,19 @@ const UpdateActivity = ({ updateActivityClicked, setUpdateActivityClicked, fetch
     e.preventDefault();
 
     try {
-      console.log(`Activity info: ${name}, ${dayName}, ${time}, ${url}`);
+      await axiosJWT.put(`/schedule?activity_id=${updateActivityClicked.activity.id}`, { name, dayName, time, url });
+      await fetchActivities();
+      setUpdateActivityClicked({ clicked: false });
     } catch (err) {
-      console.log(`Error: ${err}`);
+      setError(err.response.data.message);
     }
-
+ 
     setName('');
-    setDayName('');
-    setTime('');
+    setDayName('Monday');
+    setTime('10:00');
     setUrl('');
-    setUpdateActivityClicked({ clicked: false});
   };
-
+ 
   return (
     <div className={updateActivityClicked.clicked ? 'activity-window open' : 'activity-window'}>
       <div className='activity-content'>
@@ -40,6 +42,8 @@ const UpdateActivity = ({ updateActivityClicked, setUpdateActivityClicked, fetch
           setUrl={setUrl}
           handleSubmit={handleSubmit}
           setBtnClicked={setUpdateActivityClicked}
+          error={error}
+          setError={setError}
         />
       </div>
     </div>

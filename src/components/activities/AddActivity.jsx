@@ -3,28 +3,31 @@ import ActivityInfo from "./ActivityInfo";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 const AddActivity = ({ addActivityClicked, setAddActivityClicked, fetchActivities }) => {
+  const [error, setError] = useState('');
   const [name, setName] = useState('');
   const [dayName, setDayName] = useState('Monday');
   const [time, setTime] = useState('10:00');
   const [url, setUrl] = useState('');
   const axiosJWT = useAxiosPrivate();
-
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      console.log(`Activity info: ${name}, ${dayName}, ${time}, ${url}`);
+      await axiosJWT.post('/schedule', { name, dayName, time, url });
+      await fetchActivities();
+      setError('');
+      setAddActivityClicked({ clicked: false });
     } catch (err) {
-      console.log(`Error: ${err}`);
+      setError(err.response.data.message);
     }
 
     setName('');
-    setDayName('');
-    setTime('');
+    setDayName('Monday');
+    setTime('10:00');
     setUrl('');
-    setAddActivityClicked({ clicked: false});
   };
-
+ 
   return (
     <div className={addActivityClicked.clicked ? 'activity-window open' : 'activity-window'}>
       <div className='activity-content'>
@@ -40,6 +43,8 @@ const AddActivity = ({ addActivityClicked, setAddActivityClicked, fetchActivitie
           setUrl={setUrl}
           handleSubmit={handleSubmit}
           setBtnClicked={setAddActivityClicked}
+          error={error}
+          setError={setError}
         />
       </div>
     </div>

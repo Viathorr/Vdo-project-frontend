@@ -4,9 +4,7 @@ import TimeInput from "react-widgets/TimeInput";
 import "react-widgets/styles.css";
 import 'react-time-picker/dist/TimePicker.css';
 
-// ref TodoInfo
-const ActivityInfo = ({ name, setName, dayName, setDayName, time, setTime, url, setUrl, handleSubmit, setBtnClicked }) => {
-  // add dayName select options and combobox
+const ActivityInfo = ({ name, setName, dayName, setDayName, time, setTime, url, setUrl, handleSubmit, setBtnClicked, error, setError }) => {
   const [hours, minutes] = time.split(':').map(str => parseInt(str));
   const customDate = new Date();
   customDate.setHours(hours);
@@ -15,28 +13,37 @@ const ActivityInfo = ({ name, setName, dayName, setDayName, time, setTime, url, 
   const [date, setDate] = useState(customDate);
   return (
     <form className="activity-form">
-      <input
-        className='activity-input'
-        type="text"
-        placeholder='Activity name'
-        value={name}
-        required
-        onChange={(e) => setName(e.target.value)}
-      />
-      <input
-        className='activity-input'
-        type="text"
-        placeholder='Meeting URL (if exists)'
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-      />
+      <div className='input-div'>
+        <label htmlFor="activity-name">Name:</label>
+        <input
+          id='activity-name'
+          className='activity-input'
+          type="text"
+          placeholder='Activity name'
+          value={name}
+          required
+          onChange={(e) => setName(e.target.value)}
+        />
+      </div>
+      <div className='input-div'>
+        <label htmlFor="activity-url">URL:</label>
+        <input
+          id='activity-url'
+          className='activity-input'
+          type="text"
+          autoComplete='off'
+          placeholder='Meeting URL (if exists)'
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+        />
+      </div>
       <div className='day-dropdown-container'>
         <label htmlFor="day-dropdown">Day:</label>
         <DropdownList
           className='dropdown-list'
           id='day-dropdown'
           filter={false}
-          defaultValue={dayName}
+          value={dayName}
           data={["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]}
           onChange={value => setDayName(value)}
         />
@@ -53,8 +60,12 @@ const ActivityInfo = ({ name, setName, dayName, setDayName, time, setTime, url, 
           }}
         />
       </div>
+      { error ? <p className='error-msg' style={{ color: 'red' }}>{error}</p> : null }
       <div>
-        <button className='btn' type='button' onClick={() => setBtnClicked({ clicked: false })}>Cancel</button>
+        <button className='btn' type='button' onClick={() => {
+          setBtnClicked({ clicked: false });
+          setError('');
+        }}>Cancel</button>
         <button className='btn' type='submit' onClick={(e) => handleSubmit(e)}>Submit</button>
       </div>
     </form>

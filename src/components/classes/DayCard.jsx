@@ -1,11 +1,18 @@
 import React from 'react';
+import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 
 const DayCard = ({ day, setUpdateActivityClicked, fetchActivities }) => {
   const keys = [1, 2, 3, 4, 5];
+  const axiosJWT = useAxiosPrivate();
 
   const handleDelete = async (id) => {
-
+    try {
+      await axiosJWT.delete(`/schedule?activity_id=${id}`);
+      await fetchActivities();
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   return (
