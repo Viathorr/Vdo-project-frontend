@@ -24,7 +24,7 @@ const Navbar = ({ setLogoutClicked }) => {
         <div className="links">
           <Link className="navbar-link link" to={'/schedule'}><RiCalendarTodoLine className="icon"/>Schedule</Link>
           <Link className="navbar-link link" to={'/todos'}><LuListTodo className="icon"/>Todos</Link>
-          <Link className="navbar-link link" to={'/questions_answers'}><MdOutlineQuestionAnswer className="icon"/>Q&A</Link>
+          <Link className="navbar-link link" to={'/questions'}><MdOutlineQuestionAnswer className="icon"/>Q&A</Link>
         </div>
         <Link className="profile-link link" ref={linkRef} to='#' onClick={() => setOpen(prev => !prev)}>Profile</Link>
         <DropdownMenu id='dropdown-menu' menuRef={menuRef} open={open} setLogoutClicked={setLogoutClicked}/>

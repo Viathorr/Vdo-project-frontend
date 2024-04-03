@@ -13,6 +13,8 @@ import QuestionsFeed from './pages/questions_feed_page/QuestionsFeed';
 import RequestAuth from './pages/RequestAuth';
 import { useSelector } from 'react-redux';
 import PersistLogin from './pages/PersistLogin';
+import CertainQuestionPage from './pages/questions_feed_page/CertainQuestionPage';
+import UsersCertainQuestionPage from './pages/questions_feed_page/UsersCertainQuestionPage';
  
 function App() {
   const auth = useSelector(state => state.auth.value);
@@ -29,7 +31,13 @@ function App() {
             <Route path='/todos' element={<Todos />} />
           </Route>
           <Route element={<RequestAuth />}>
-            <Route path='/questions_answers' element={<QuestionsFeed />} />
+            <Route path='/questions' element={<QuestionsFeed />} />
+          </Route>
+          <Route element={<RequestAuth />}>
+            <Route path='/certain_question/:id' element={<CertainQuestionPage />} />
+          </Route>
+          <Route element={<RequestAuth />}>
+            <Route path='/my_certain_question/:id' element={<UsersCertainQuestionPage />} />
           </Route>
           <Route element={<RequestAuth/>}>
             <Route path='/profile' element={<Profile />} />
