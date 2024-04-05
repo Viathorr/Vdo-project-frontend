@@ -7,7 +7,7 @@ import useAxiosFetch from '../hooks/useAxiosFetch';
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useDispatch, useSelector } from 'react-redux';
 import { updateTodos } from '../features/todos/todos';
-import Pagination from "../components/todos/Pagination";
+import Pagination from "../components/Pagination";
 import UpdateTodo from '../components/todos/UpdateTodo';
  
 const Todos = () => {

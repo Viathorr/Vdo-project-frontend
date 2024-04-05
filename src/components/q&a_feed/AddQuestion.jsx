@@ -18,12 +18,13 @@ const AddQuestion = ({ addQuestionClicked, setAddQuestionClicked, user }) => {
     e.preventDefault();
 
     try {
-
+      // await axiosJWT.post('/posts', { content: question });
     } catch (err) {
       console.log(err.message);
     }
 
     setQuestion('');
+    setAddQuestionClicked(false);
   }
 
   return (
@@ -39,8 +40,8 @@ const AddQuestion = ({ addQuestionClicked, setAddQuestionClicked, user }) => {
         </div>
         <form>
           <div className="main-content">
-            <img src={user.profileImage ? user.profileImage : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'} alt="profile-image" />
-            <input type="text" value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="Start your question with 'What', 'How', 'Why', etc. (min 10 characters)"/>
+            <a href="http://localhost:3000/profile"><img src={user.profileImage ? user.profileImage : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'} alt="profile-image" /></a>
+            <input type="text" value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="Start your question with 'What', 'How', 'Why', etc. (min 10 characters, max 255)"/>
           </div>
           <div className="btns-container">
             <button type="button" className="btn" onClick={() => {
@@ -48,7 +49,7 @@ const AddQuestion = ({ addQuestionClicked, setAddQuestionClicked, user }) => {
               setQuestion('');
             }
             }>Cancel</button>
-            <button type="submit" className="btn" disabled={question?.length > 10 ? false : true } onClick={(e) => handleSubmit(e)}>Submit</button>
+            <button type="submit" className="btn" disabled={question?.length > 10 && question?.length < 255 ? false : true } onClick={(e) => handleSubmit(e)}>Submit</button>
           </div>
         </form>
       </div>

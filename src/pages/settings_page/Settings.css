@@ -4,6 +4,10 @@
   --delete-color: #cc0000;
 }
 
+button {
+  font-weight: 500;
+}
+
 .settings-container label {
   font-size: 0.9rem;
   font-weight: 500;

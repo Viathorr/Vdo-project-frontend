@@ -336,7 +336,7 @@ a {
   margin-bottom: 2rem;
 }
 
-.todos-container .pagination-container {
+.pagination-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -353,16 +353,16 @@ a {
   color: #fff;
 }
 
-.todos-container .pagination-container .btn:hover {
-  background-color: rgba(38, 106, 178, 0.9);
+.pagination-container .btn:hover {
+  background-color: #266ab2e6;
 }
 
-.todos-container .pagination-container .btn:disabled {
+.pagination-container .btn:disabled {
   background-color: #999;
   cursor: default;
 }
 
-.todos-container .pagination-container .page-num {
+.pagination-container .page-num {
   font-size: 1.1rem;
   font-weight: 500;
   border-bottom: 1px solid #000;
@@ -610,8 +610,11 @@ a {
   border: none;
   color: #fff;
   margin: 0 1rem;
-  padding: 0.3rem 0.5rem;
-  border-radius: 0.25rem;
+  /* padding: 0.3rem 0.5rem;
+  border-radius: 0.25rem; */
+  height: 30px;
+  width: 70px;
+  border-radius: 1.5rem;
 }
 
 .todo-window .todo-form .btn:first-of-type,
