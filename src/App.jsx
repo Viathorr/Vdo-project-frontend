@@ -34,10 +34,10 @@ function App() {
             <Route path='/questions' element={<QuestionsFeed />} />
           </Route>
           <Route element={<RequestAuth />}>
-            <Route path='/certain_question/:id' element={<CertainQuestionPage />} />
+            <Route path='/questions/:id' element={<CertainQuestionPage />} />
           </Route>
           <Route element={<RequestAuth />}>
-            <Route path='/my_certain_question/:id' element={<UsersCertainQuestionPage />} />
+            <Route path='/my_questions/:id' element={<UsersCertainQuestionPage />} />
           </Route>
           <Route element={<RequestAuth/>}>
             <Route path='/profile' element={<Profile />} />
