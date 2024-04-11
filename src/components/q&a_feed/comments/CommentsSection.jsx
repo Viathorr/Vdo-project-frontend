@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import useAxiosPrivate from '../../hooks/useAxiosPrivate';
+import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
 import { useSelector } from 'react-redux';
 import CommentCard from './CommentCard';
+import { IoIosArrowDown } from "react-icons/io";
 
 const CommentsSection = ({ id, post, setPost }) => {
   const axiosJWT = useAxiosPrivate();
@@ -14,7 +15,7 @@ const CommentsSection = ({ id, post, setPost }) => {
       content: 'Hi, Nice to meet you>',
       created_at: new Date('2024-04-08T22:30:00'),
       userIsCreator: false,
-      userProfileImageUrl: ''
+      userProfileImageURL: ''
     },
     {
       id: 2,
@@ -22,7 +23,7 @@ const CommentsSection = ({ id, post, setPost }) => {
       content: 'Hi, how are you?)',
       created_at: new Date('2024-04-07T10:00:00'),
       userIsCreator: true,
-      userProfileImageUrl: user.profileImage
+      userProfileImageURL: user.profileImage
     },
     {
       id: 3,
@@ -30,9 +31,11 @@ const CommentsSection = ({ id, post, setPost }) => {
       content: 'Yoy yoy yoy, what are you up to?',
       created_at: new Date('2024-04-05T23:00:00'),
       userIsCreator: false,
-      userProfileImageUrl: ''
+      userProfileImageURL: ''
     },
   ]);
+  const [page, setPage] = useState(1);
+  const [nextPage, setNextPage] = useState(2);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,7 +45,7 @@ const CommentsSection = ({ id, post, setPost }) => {
         content: comment,
         userIsCreator: true,
         created_at: new Date(),
-        userProfileImageUrl: user.profileImage,
+        userProfileImageURL: user.profileImage,
         username: user.name
       }]);
       setPost(prev => ({ ...prev, comments: prev.comments + 1 }));
@@ -59,7 +62,16 @@ const CommentsSection = ({ id, post, setPost }) => {
     } catch (err) {
       alert(err.message);
     }
-  }
+  };
+
+  const handleUploadMore = async () => {
+    try {
+      setPage(prev => prev + 1);
+      setNextPage(null);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
 
   return (
     <div className='comments-container'>
@@ -72,11 +84,11 @@ const CommentsSection = ({ id, post, setPost }) => {
           <input
             className='comment-input'
             type="text"
-            placeholder='Add a comment... (min 25 characters, max 250 characters)'
+            placeholder='Add a comment... (min 10 characters, max 255 characters)'
             value={comment}
             onChange={(e) => setComment(e.target.value)}
           />
-          <button className='btn' type="submit" onClick={(e) => handleSubmit(e)} disabled={comment.length < 25 || comment.length > 250 || comment.replace(/\s/g, '').length == 0 ? true : false }>Comment</button>
+          <button className='btn' type="submit" onClick={(e) => handleSubmit(e)} disabled={comment.length < 10 || comment.length > 255 || comment.replace(/\s/g, '').length == 0 ? true : false }>Comment</button>
         </form>
       </div>
       <div className='comments-feed'>
@@ -86,7 +98,13 @@ const CommentsSection = ({ id, post, setPost }) => {
           : <p>No comments.</p>
         }
       </div>
-      {/* Add 'View more comments' button */}
+      {nextPage ? 
+        <div className='view-questions-btn' onClick={() => handleUploadMore()}>
+          View more questions
+          <IoIosArrowDown className='icon arrow-down'/>
+        </div>
+        : null
+      }
     </div>
   )
 };

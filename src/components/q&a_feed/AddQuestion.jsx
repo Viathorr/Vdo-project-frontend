@@ -49,7 +49,7 @@ const AddQuestion = ({ addQuestionClicked, setAddQuestionClicked, user }) => {
               setQuestion('');
             }
             }>Cancel</button>
-            <button type="submit" className="btn" disabled={question?.length > 10 && question?.length < 255 ? false : true } onClick={(e) => handleSubmit(e)}>Submit</button>
+            <button type="submit" className="btn" disabled={question?.length > 10 && question?.length < 255 && question.replace(/\s/g, '').length != 0  ? false : true } onClick={(e) => handleSubmit(e)}>Submit</button>
           </div>
         </form>
       </div>

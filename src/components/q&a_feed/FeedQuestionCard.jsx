@@ -1,17 +1,10 @@
 import { BiLike } from "react-icons/bi";
 import { FaRegComment } from "react-icons/fa";
-import { useNavigate } from 'react-router-dom';
 import parseTimeInfo from "./utilities/parseTime";
 
-const FeedQuestionCard = ({ question }) => {
-  const navigate = useNavigate();
-
-  const handlClick = () => {
-    navigate(`/questions/${question.id}`);
-  }
-
+const FeedQuestionCard = ({ question, handleClick }) => {
   return (
-    <div className="feed-question-card" onClick={() => handlClick()}>
+    <div className="feed-question-card" onClick={() => handleClick(question.id)}>
       <div className="question-header">
         <img src={question.userProfileImageURL ? question.userProfileImageURL : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'} alt="profile image" />
         <p className="username">{question.username}</p>

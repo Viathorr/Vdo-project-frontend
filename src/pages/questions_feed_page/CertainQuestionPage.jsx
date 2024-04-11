@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
-import QuestionCard from '../../components/q&a_feed/QuestionCard';
+import QuestionCard from '../../components/q&a_feed/question_cards/QuestionCard';
 import { useState } from 'react';
-import CommentsSection from '../../components/q&a_feed/CommentsSection';
+import CommentsSection from '../../components/q&a_feed/comments/CommentsSection';
 
 const CertainQuestionPage = () => {
   const [post, setPost] = useState({

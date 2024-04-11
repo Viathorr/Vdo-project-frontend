@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import FeedQuestionCard from './FeedQuestionCard';
 import { IoIosArrowDown } from "react-icons/io";
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
+import { useNavigate } from 'react-router-dom';
 
 const AllQuestions = () => {
+  const navigate = useNavigate();
   const axiosJWT = useAxiosPrivate();
   const [page, setPage] = useState(1);
   const [nextPage, setNextPage] = useState(2);
@@ -37,9 +39,14 @@ const AllQuestions = () => {
     },
   ]);
 
+  const handleClick = (id) => {
+    navigate(`/questions/${id}`);
+  }
+
   const handleUploadMore = async () => {
     try {
       setPage(prev => prev + 1);
+      setNextPage(null);
     } catch (err) {
       console.log(err.message);
     }
@@ -47,7 +54,7 @@ const AllQuestions = () => {
 
   return (
     <div className='questions-feed'>
-      {posts.map(question => (<FeedQuestionCard question={question} />))}
+      {posts.map(question => (<FeedQuestionCard question={question} handleClick={handleClick} />))}
       {nextPage ? 
         <div className='view-questions-btn' onClick={() => handleUploadMore()}>
           View more questions

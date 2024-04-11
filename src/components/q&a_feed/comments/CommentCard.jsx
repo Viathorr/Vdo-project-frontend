@@ -1,8 +1,8 @@
 import { BsThreeDotsVertical } from "react-icons/bs";
-import parseTimeInfo from "./utilities/parseTime";
+import parseTimeInfo from "../utilities/parseTime";
 import { useState } from "react";
 
-const CommentCard = ({ comment, setComments, handleDelete }) => {
+const CommentCard = ({ comment, handleDelete }) => {
   const [showMenu, setShowMenu] = useState(false);
 
   return (

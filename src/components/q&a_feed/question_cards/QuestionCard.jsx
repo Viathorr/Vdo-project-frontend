@@ -1,12 +1,12 @@
 import { FaRegBookmark, FaBookmark } from "react-icons/fa6";
 import { BiLike, BiSolidLike } from "react-icons/bi";
 import { FaRegComment } from "react-icons/fa";
-import parseTimeInfo from "./utilities/parseTime";
-import useAxiosPrivate from '../../hooks/useAxiosPrivate';
-import CommentsSection from "./CommentsSection";
+import parseTimeInfo from "../utilities/parseTime";
+import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
 
 const QuestionCard = ({ question, setQuestion }) => {
   const axiosJWT = useAxiosPrivate();
+  
   const handleLike = async () => {
     setQuestion(prev => ({ ...prev, liked: !prev.liked, numOfLikes: !prev.liked ? prev.numOfLikes + 1 : prev.numOfLikes - 1 }));
   };
@@ -24,9 +24,7 @@ const QuestionCard = ({ question, setQuestion }) => {
         <p className="created-label">{parseTimeInfo(question.created_at)}</p>
       </div>
       <div className="question-content">
-          {(question.content).length <= 100
-          ? question.content
-          : `${(question.content).slice(0, 100)}...`}
+        {question.content}
       </div>
       <div className="question-footer">
         <div>
