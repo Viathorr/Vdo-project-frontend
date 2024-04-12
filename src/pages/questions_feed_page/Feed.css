@@ -213,8 +213,8 @@
 /* Question Feed */
 .questions-feed-container .questions-container {
   color: #000;
-  height: 500vh;
-  /* height: 100vh; */
+  /* height: 500vh; */
+  min-height: 100vh;
   background-color: #f0f0f0;
 }
 

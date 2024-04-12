@@ -13,8 +13,8 @@ import QuestionsFeed from './pages/questions_feed_page/QuestionsFeed';
 import RequestAuth from './pages/RequestAuth';
 import { useSelector } from 'react-redux';
 import PersistLogin from './pages/PersistLogin';
-import CertainQuestionPage from './pages/questions_feed_page/CertainQuestionPage';
-import UsersCertainQuestionPage from './pages/questions_feed_page/UsersCertainQuestionPage';
+import CertainQuestionPage from './pages/questions_feed_page/question_pages/CertainQuestionPage';
+import UsersCertainQuestionPage from './pages/questions_feed_page/question_pages/UsersCertainQuestionPage';
  
 function App() {
   const auth = useSelector(state => state.auth.value);

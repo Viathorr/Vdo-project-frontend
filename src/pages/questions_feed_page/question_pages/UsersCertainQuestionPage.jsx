@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
-import CommentsSection from '../../components/q&a_feed/comments/CommentsSection';
-import UsersQuestionCard from '../../components/q&a_feed/question_cards/UsersQuestionCard';
+import CommentsSection from '../../../components/q&a_feed/comments/CommentsSection';
+import UsersQuestionCard from '../../../components/q&a_feed/question_cards/UsersQuestionCard';
 
 const UsersCertainQuestionPage = () => {
   const { id } = useParams();

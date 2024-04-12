@@ -9,7 +9,7 @@ const FeedQuestionCard = ({ question, handleClick }) => {
         <img src={question.userProfileImageURL ? question.userProfileImageURL : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'} alt="profile image" />
         <p className="username">{question.username}</p>
         <div className="dot"></div>
-        <p className="created-label">{parseTimeInfo(question.created_at)}</p>
+        <p className="created-label">{parseTimeInfo(question.createdAt)}</p>
       </div>
       <div className="question-content">
           {(question.content).length <= 100
