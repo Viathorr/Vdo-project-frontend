@@ -18,9 +18,10 @@ const AddQuestion = ({ addQuestionClicked, setAddQuestionClicked, user }) => {
     e.preventDefault();
 
     try {
-      // await axiosJWT.post('/posts', { content: question });
+      await axiosJWT.post('/posts', { content: question });
     } catch (err) {
-      console.log(err.message);
+      alert(err.message);
+      // console.log(err.message);
     }
 
     setQuestion('');
