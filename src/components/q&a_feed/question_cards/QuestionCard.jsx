@@ -6,13 +6,31 @@ import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
 
 const QuestionCard = ({ question, setQuestion }) => {
   const axiosJWT = useAxiosPrivate();
-  
+   
   const handleLike = async () => {
-    setQuestion(prev => ({ ...prev, liked: !prev.liked, numOfLikes: !prev.liked ? prev.numOfLikes + 1 : prev.numOfLikes - 1 }));
+    try {
+      if (question.liked) {
+        await axiosJWT.delete(`/likes?post_id=${question.id}`);
+      } else {
+        await axiosJWT.post(`/likes?post_id=${question.id}`);
+      }
+      setQuestion(prev => ({ ...prev, liked: !prev.liked, numOfLikes: !prev.liked ? prev.numOfLikes + 1 : prev.numOfLikes - 1 }));
+    } catch (err) {
+      alert(err.message);
+    }
   };
 
   const handleSave = async () => {
-    setQuestion(prev => ({ ...prev, saved: !prev.saved }));
+    try {
+      if (question.saved) {
+        await axiosJWT.delete(`/posts/saved?post_id=${question.id}`);
+      } else {
+        await axiosJWT.post(`/posts/saved?post_id=${question.id}`);
+      }
+      setQuestion(prev => ({ ...prev, saved: !prev.saved }));
+    } catch (err) {
+      alert(err.message);
+    }
   };
 
   return (

@@ -16,7 +16,6 @@ const UsersQuestions = () => {
 
   useEffect(() => {
     setNextPage(data.nextPage ? data.nextPage : null);
-    console.log(data.posts);
     setPosts(prev => [...prev,
     ...(data.posts
       ? data.posts.map(post => ({ ...post, createdAt: new Date(post.createdAt), username: user.name, userProfileImageURL: user.profileImage }))
@@ -29,14 +28,10 @@ const UsersQuestions = () => {
 
   const handleClick = (id) => {
     navigate(`/my_questions/${id}`);
-  }
+  };
 
   const handleUploadMore = async () => {
-    try {
-      setPage(prev => prev + 1);
-    } catch (err) {
-      console.log(err.message);
-    }
+    setPage(prev => prev + 1);
   };
 
   return (

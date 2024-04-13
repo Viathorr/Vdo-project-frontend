@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import FeedQuestionCard from './FeedQuestionCard';
 import { IoIosArrowDown } from "react-icons/io";
-import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import useAxiosFetch from '../../hooks/useAxiosFetch';
 import { useNavigate } from 'react-router-dom';
 
@@ -27,14 +26,10 @@ const AllQuestions = () => {
 
   const handleClick = (id) => {
     navigate(`/questions/${id}`);
-  }
+  };
  
   const handleUploadMore = async () => {
-    try {
-      setPage(prev => prev + 1);
-    } catch (err) {
-      console.log(err.message);
-    }
+    setPage(prev => prev + 1);
   };
 
   return (

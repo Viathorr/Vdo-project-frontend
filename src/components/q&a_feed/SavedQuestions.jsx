@@ -14,7 +14,6 @@ const SavedQuestions = () => {
 
   useEffect(() => {
     setNextPage(data.nextPage ? data.nextPage : null);
-    console.log(data.posts);
     setPosts(prev => [...prev,
     ...(data.posts
       ? data.posts.map(post => ({ ...post, createdAt: new Date(post.createdAt) }))
@@ -27,14 +26,10 @@ const SavedQuestions = () => {
 
   const handleClick = (id) => {
     navigate(`/questions/${id}`);
-  }
+  };
  
   const handleUploadMore = async () => {
-    try {
-      setPage(prev => prev + 1);
-    } catch (err) {
-      console.log(err.message);
-    }
+    setPage(prev => prev + 1);
   };
   
   return (
