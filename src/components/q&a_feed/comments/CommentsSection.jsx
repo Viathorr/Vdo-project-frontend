@@ -1,76 +1,63 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
 import { useSelector } from 'react-redux';
 import CommentCard from './CommentCard';
 import { IoIosArrowDown } from "react-icons/io";
+import useAxiosFetch from '../../../hooks/useAxiosFetch';
 
-const CommentsSection = ({ id, post, setPost }) => {
+const CommentsSection = ({ post, setPost }) => {
   const axiosJWT = useAxiosPrivate();
   const user = useSelector(state => state.user.value);
+  const [url, setUrl] = useState(`/comments?post_id=${post.id}`);
+  const { data, isLoading, fetchError } = useAxiosFetch(url);
   const [comment, setComment] = useState('');
-  const [comments, setComments] = useState([
-    {
-      id: 1,
-      username: 'TestUser2',
-      content: 'Hi, Nice to meet you>',
-      created_at: new Date('2024-04-08T22:30:00'),
-      userIsCreator: false,
-      userProfileImageURL: ''
-    },
-    {
-      id: 2,
-      username: user.name,
-      content: 'Hi, how are you?)',
-      created_at: new Date('2024-04-07T10:00:00'),
-      userIsCreator: true,
-      userProfileImageURL: user.profileImage
-    },
-    {
-      id: 3,
-      username: 'Constellation',
-      content: 'Yoy yoy yoy, what are you up to?',
-      created_at: new Date('2024-04-05T23:00:00'),
-      userIsCreator: false,
-      userProfileImageURL: ''
-    },
-  ]);
+  const [comments, setComments] = useState([]);
   const [page, setPage] = useState(1);
-  const [nextPage, setNextPage] = useState(2);
+  const [nextPage, setNextPage] = useState(null);
+
+  useEffect(() => {
+    setNextPage(data.nextPage ? data.nextPage : null);
+    setComments(prev => [...prev,
+    ...(data.comments
+      ? data.comments.map(comment => ({ ...comment, created_at: new Date(comment.created_at) }))
+      : [])]);
+  }, [data]);
+
+  useEffect(() => {
+    setUrl(`/comments?post_id=${post.id}&page=${page}`);
+  }, [page, post]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setComments(prev => [...prev, {
-        id: prev[prev.length - 1]?.id ? id + 1 : 1,
-        content: comment,
-        userIsCreator: true,
-        created_at: new Date(),
-        userProfileImageURL: user.profileImage,
-        username: user.name
-      }]);
+      await axiosJWT.post(`/comments?post_id=${post.id}`, { content: comment });
+      setComments([]);
+      if (url === `/comments?post_id=${post.id}&page=1`) {
+        setUrl(`/comments?post_id=${post.id}`);
+      } else if (url === `/comments?post_id=${post.id}`) {
+        setUrl(`/comments?post_id=${post.id}&page=1`);
+      } else {
+        setPage(1);
+      }
       setPost(prev => ({ ...prev, comments: prev.comments + 1 }));
     } catch (err) {
       alert(err.message);
     }
-
     setComment('');
   }
-
+ 
   const handleDelete = async (id) => {
     try {
+      await axiosJWT.delete(`/comments?post_id=${post.id}&comment_id=${id}`);
       setComments(prev => prev.filter(comment => comment.id !== id));
+      setPost(prev => ({ ...prev, comments: prev.comments - 1 }));
     } catch (err) {
       alert(err.message);
     }
   };
 
   const handleUploadMore = async () => {
-    try {
-      setPage(prev => prev + 1);
-      setNextPage(null);
-    } catch (err) {
-      console.log(err.message);
-    }
+    setPage(prev => prev + 1);
   };
 
   return (
@@ -91,13 +78,17 @@ const CommentsSection = ({ id, post, setPost }) => {
           <button className='btn' type="submit" onClick={(e) => handleSubmit(e)} disabled={comment.length < 10 || comment.length > 255 || comment.replace(/\s/g, '').length == 0 ? true : false }>Comment</button>
         </form>
       </div>
-      <div className='comments-feed'>
-        { comments.length
-          ? comments.map(comment => (
-          <CommentCard comment={comment} setComments={setComments} handleDelete={handleDelete}/>))
-          : <p>No comments.</p>
+        { isLoading && <p>Loading...</p> }
+        { !isLoading && fetchError && <p style={{ color: 'red' }}>{fetchError}</p> }
+        { !isLoading && !fetchError &&
+          <div className='comments-feed'>
+            {comments.length
+              ? comments.map(comment => (
+                <CommentCard comment={comment} setComments={setComments} handleDelete={handleDelete} />))
+              : <p className='no-comments-label'>No comments.</p>
+            }
+          </div>
         }
-      </div>
       {nextPage ? 
         <div className='view-questions-btn' onClick={() => handleUploadMore()}>
           View more questions

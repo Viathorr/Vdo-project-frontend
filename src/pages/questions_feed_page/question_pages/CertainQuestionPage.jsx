@@ -8,7 +8,7 @@ const CertainQuestionPage = () => {
   const { id } = useParams();
   const API_URL = `/posts/${id}`;
   const { data, isLoading, fetchError } = useAxiosFetch(API_URL);
-  const [post, setPost] = useState(null);
+  const [post, setPost] = useState({});
 
   useEffect(() => {
     setPost({...data, created_at: new Date(data.created_at)});

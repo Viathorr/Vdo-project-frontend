@@ -419,6 +419,10 @@
   cursor: default;
 }
 
+.comments-container .no-comments-label {
+  margin-bottom: 5rem;
+}
+
 .comments-container .comments-header {
   text-align: start;
   font-weight: 500;

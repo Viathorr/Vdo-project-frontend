@@ -17,7 +17,7 @@ const SavedQuestions = () => {
     setPosts(prev => [...prev,
     ...(data.posts
       ? data.posts.map(post => ({ ...post, createdAt: new Date(post.createdAt) }))
-      : [])]);
+        : [])]);
   }, [data]);
 
   useEffect(() => {
@@ -25,6 +25,7 @@ const SavedQuestions = () => {
   }, [page]);
 
   const handleClick = (id) => {
+    console.log(id);
     navigate(`/questions/${id}`);
   };
  
