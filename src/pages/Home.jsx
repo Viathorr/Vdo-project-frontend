@@ -5,11 +5,11 @@ const Home = () => {
     <>
       <main className="home">
         <section className="welcome-section">
-            <h1>Welcome to Your Schedule!</h1>
-            <p>Here you'll learn how to spend your time wisely and not sit idly.</p>
+          <h1>Welcome to Your Schedule!</h1>
+          <p style={{margin: '1rem 4rem'}}>Discover smart ways to manage your time and stay productive, ensuring you never waste a moment idly.</p>
         </section>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </>
   )
 };

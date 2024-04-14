@@ -10,14 +10,14 @@ const Profile = () => {
   const user = useSelector(state => state.user.value);
   const [userInfo, setUserInfo] = useState({
     completedTodos: 0,
-    askedQuestions: 4,
+    askedQuestions: 0, 
     leftTodos: 0
   })
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(setUser({ ...user, name: data.name, country: data.country, email: data.email, phoneNumber: data.phoneNum, profileImage: data.profilePicture }));
-    setUserInfo(prev => ({ ...prev, completedTodos: data.completedTodos, leftTodos: data.leftTodos }));
+    setUserInfo(prev => ({ ...prev, completedTodos: data.completedTodos, leftTodos: data.leftTodos, askedQuestions: data.askedQuestions }));
   }, [data, dispatch]);
 
   return (
@@ -51,9 +51,6 @@ const Profile = () => {
                 <h3>Asked questions <FcCollaboration className='icon' /></h3>
                 <p>{userInfo.askedQuestions}</p>
               </div>
-            </div>
-            <div className='activity-stats'>
-              <h1>Your activity chart</h1>
             </div>
           </div>
         </>

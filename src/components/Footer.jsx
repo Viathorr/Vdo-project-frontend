@@ -5,7 +5,6 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div>
-        
         <a href="mailto:theuseful13@gmail.com" target="_blank" rel="noopener noreferrer">
           <MdEmail className="icon" />
         </a>
