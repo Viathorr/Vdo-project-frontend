@@ -40,12 +40,12 @@ const UsersQuestionCard = ({ question, setQuestion }) => {
     }
   };
 
-  const handleUpdate = async () => {
+  const handleEdit = async () => {
     setUpdateClicked(true);
     setShowMenu(false);
   };
 
-  const handleUpdateSubmit = async () => {
+  const handleEditSubmit = async () => {
     try {
       await axiosJWT.put(`/posts/${question.id}`, { content: questionContent });
       setQuestion(prev => ({ ...prev, content: questionContent }));
@@ -72,7 +72,7 @@ const UsersQuestionCard = ({ question, setQuestion }) => {
             }
           }}/>
           <div className={showMenu ? "dropdown" : "dropdown hide"}>
-            <button className="btn" onClick={() => handleUpdate()}>Update</button>
+            <button className="btn" onClick={() => handleEdit()}>Edit</button>
             <button className="btn" onClick={() => handleDelete()}>Delete</button>
           </div>
         </div>
@@ -102,7 +102,7 @@ const UsersQuestionCard = ({ question, setQuestion }) => {
               setUpdateClicked(false);
               setQuestionContent(question.content);
             }}>Cancel</button>
-            <button className="submit-btn btn" disabled={ questionContent.length < 10 || questionContent.length > 255 || questionContent.replace(/\s/g, '').length == 0 ? true : false } onClick={() => handleUpdateSubmit()}>Submit</button>
+            <button className="submit-btn btn" disabled={ questionContent.length < 10 || questionContent.length > 255 || questionContent.replace(/\s/g, '').length == 0 ? true : false } onClick={() => handleEditSubmit()}>Submit</button>
             </div>
             : null
           }

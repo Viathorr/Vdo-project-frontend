@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { setAuth } from '../../features/auth/auth';
 import { initAxios } from '../../api/axios';
 
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+const USER_REGEX =/^[A-z][A-z0-9_-\s]{3,23}$/;
 const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = '/register';
@@ -202,11 +202,11 @@ const SignUpForm = () => {
       <p className='navigation-label'>Already have an account?
         <span><Link className='link' to={'/login'}>Login</Link></span>
       </p>
-      <p className='or-label'>Or</p>
+      {/* <p className='or-label'>Or</p>
       <button className='google-btn'>
         <FcGoogle className='google-icon'/>
         Login with Google
-      </button>
+      </button> */}
     </div>
   )
 };

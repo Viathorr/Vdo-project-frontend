@@ -96,11 +96,11 @@ const LoginForm = () => {
       <p className='navigation-label'>Don't have an account?
         <span><Link className='link' to={'/signup'}>Signup</Link></span>
       </p>
-      <p className='or-label'>Or</p>
+      {/* <p className='or-label'>Or</p>
       <button className='google-btn'>
         <FcGoogle className='google-icon'/>
         Login with Google
-      </button>
+      </button> */}
     </div>
   )
 };
