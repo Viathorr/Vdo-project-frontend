@@ -7,7 +7,7 @@ const TodoInfo = ({ todoName, setTodoName, deadline, setDeadline, handleSubmit, 
       <input
         className='todo-name-input'
         type="text"
-        placeholder='Todo name here'
+        placeholder='Todo name(len: 3-50chars)'
         value={todoName}
         onChange={(e) => setTodoName(e.target.value)}
       />
@@ -27,7 +27,12 @@ const TodoInfo = ({ todoName, setTodoName, deadline, setDeadline, handleSubmit, 
       </div>
       <div>
         <button className='btn' type='button' onClick={() => setBtnClicked({ clicked: false })}>Cancel</button>
-        <button className='btn' type='submit' onClick={(e) => handleSubmit(e)}>Submit</button>
+        <button
+          className='btn'
+          type='submit'
+          onClick={(e) => handleSubmit(e)}
+          disabled={todoName?.length > 3 && todoName?.length < 50 ? false : true}
+        >Submit</button>
       </div>
     </form>
   )

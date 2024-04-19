@@ -604,6 +604,11 @@ a {
   margin-bottom: 1rem;
 }
 
+.todo-window .todo-form .todo-name-input {
+  width: 97%;
+}
+
+
 .todo-window .todo-form .btn,
 .activity-window .activity-form .btn {
   font-size: 0.9rem;
@@ -630,6 +635,14 @@ a {
 .todo-window .todo-form .btn:last-of-type,
 .activity-window .activity-form .btn:last-of-type {
   background-color: var(--background-primary-color);
+}
+
+.todo-window .todo-form .btn:last-of-type:disabled,
+.todo-window .todo-form .btn:last-of-type:disabled:hover,
+.activity-window .activity-form .btn:last-of-type:disabled,
+.activity-window .activity-form .btn:last-of-type:disabled:hover {
+  background-color: #ababab;
+  cursor: default;
 }
 
 .todo-window .todo-form .btn:last-of-type:hover,

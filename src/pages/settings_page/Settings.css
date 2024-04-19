@@ -227,6 +227,12 @@ button {
   background-color: var(--delete-color);
 }
 
+.settings-container .save-btn:disabled,
+.settings-container .save-btn:disabled:hover {
+  background-color: #ababab;
+  cursor: default;
+}
+
 .settings-container .save-btn:hover,
 .settings-container .change-pwd-btn:hover {
   background-color: #12547d;

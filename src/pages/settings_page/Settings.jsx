@@ -92,7 +92,15 @@ const Settings = () => {
   const handleSaveChanges = async () => {
     try {
       if (nameValid && phoneNumValid) {
-        const res = await saveChanges(name, country, phoneNum);
+        let res;
+        if (country) {
+          if (country.length > 3 && country.length < 20) {
+            res = await saveChanges(name, country, phoneNum);
+          } else {
+            return;
+          }
+        }
+        res = await saveChanges(name, country, phoneNum);
 
         if (res.status === 200) {
           if (imgFile) {
@@ -170,7 +178,7 @@ const Settings = () => {
                       id='full-name'
                       type="text"
                       value={name}
-                      placeholder='Name'
+                      placeholder='Name(len: 3-23chars)'
                       onChange={(e) => setName(e.target.value)}
                         required
                         autoComplete='off'
@@ -195,7 +203,7 @@ const Settings = () => {
                       id='country'
                       type="text"
                       value={country}
-                      placeholder='Country'
+                      placeholder='Country(len: 3-23chars)'
                       autoComplete='off'
                       onChange={(e) => setCountry(e.target.value)}
                     />
@@ -206,7 +214,7 @@ const Settings = () => {
                       id='phone-num'
                       type="tel"
                       value={phoneNum}
-                        placeholder='Phone number'
+                        placeholder='Phone number(len: 10-12digits)'
                         autoComplete='off'
                       onChange={(e) => setPhoneNum(e.target.value)}
                     />
@@ -288,7 +296,18 @@ const Settings = () => {
           <div className='btns-container'>
             <button className='change-pwd-btn' onClick={handlePwdChange}>Change password</button>
             <button className='delete-btn' onClick={() => setDeleteClicked(true)}><TiUserDeleteOutline className='icon' />Delete account</button>
-            <button className='save-btn' onClick={handleSaveChanges}><LuSave className='icon' />Save changes</button>
+              <button
+                className='save-btn'
+                onClick={handleSaveChanges}
+                disabled={
+                  nameValid
+                    ? phoneNumValid
+                      ? country
+                        ? country.length < 3 || country.length > 23
+                        : false
+                      : true
+                    : true}
+              ><LuSave className='icon' />Save changes</button>
               {changeRes ? changeRes === 'ok' ? 
                 <FcOk className='res-icon' /> :
                 <FcCancel className='res-icon' /> : 

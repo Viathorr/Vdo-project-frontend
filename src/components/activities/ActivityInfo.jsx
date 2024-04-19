@@ -19,7 +19,7 @@ const ActivityInfo = ({ name, setName, dayName, setDayName, time, setTime, url, 
           id='activity-name'
           className='activity-input'
           type="text"
-          placeholder='Activity name'
+          placeholder='Activity name(len: 3-35chars)'
           value={name}
           required
           onChange={(e) => setName(e.target.value)}
@@ -66,7 +66,12 @@ const ActivityInfo = ({ name, setName, dayName, setDayName, time, setTime, url, 
           setBtnClicked({ clicked: false });
           setError('');
         }}>Cancel</button>
-        <button className='btn' type='submit' onClick={(e) => handleSubmit(e)}>Submit</button>
+        <button
+          className='btn'
+          type='submit'
+          disabled={name?.length > 3 && name?.length < 35 ? false : true}
+          onClick={(e) => handleSubmit(e)}
+        >Submit</button>
       </div>
     </form>
   )

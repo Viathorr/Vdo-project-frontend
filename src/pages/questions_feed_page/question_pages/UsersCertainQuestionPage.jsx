@@ -3,16 +3,24 @@ import { useState, useEffect } from 'react';
 import CommentsSection from '../../../components/q&a_feed/comments/CommentsSection';
 import UsersQuestionCard from '../../../components/q&a_feed/question_cards/UsersQuestionCard';
 import useAxiosFetch from '../../../hooks/useAxiosFetch';
+import { useNavigate } from 'react-router-dom';
  
 const UsersCertainQuestionPage = () => {
   const { id } = useParams();
   const API_URL = `/posts/${id}`;
   const { data, isLoading, fetchError } = useAxiosFetch(API_URL);
   const [post, setPost] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setPost({...data, created_at: new Date(data.created_at)});
   }, [data]);
+
+  useEffect(() => {
+    if (fetchError) {
+      navigate('/missing');
+    }
+  }, [fetchError]);
 
   return (
     <div className='question-container'>
